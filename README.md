@@ -6,7 +6,7 @@ Hi! I'm Artiom, a junior developer from Vilnius, Lithuania — Game Development 
 
 | Project | Tech | Description |
 |---|---|---|
-| [Clicker Game](#-clicker-game) | Unity, C# 
+| [Clicker Game](#-clicker-game) | Unity, C# | Incremental clicker with prestige mechanic — builds to Windows and WebGL |
 | Home Lab | Raspberry Pi, Linux, DNS/DHCP, SSH | My home network lab — Pi-hole ad-blocking, remote administration |
 
 ---
@@ -15,7 +15,7 @@ Hi! I'm Artiom, a junior developer from Vilnius, Lithuania — Game Development 
 
 **Engine:** Unity 2022.3 LTS · **Language:** C# · **Status:** Playable build available
 
-An incremental clicker where the player grows [X] from a single click to an automated empire. Built to practise core Unity workflows: UI, game state, prestige mechanic.
+An incremental clicker where the player grows gold from a single click to an automated empire. Built to practise core Unity workflows: UI, game state, prestige mechanic.
 
 ### ✨ Features
 
