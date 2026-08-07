@@ -7,7 +7,7 @@ Hi! I'm Artiom, a junior developer from Vilnius, Lithuania — Game Development 
 | Project | Tech | Description |
 |---|---|---|
 | [Clicker Game](#-clicker-game) | Unity, C# 
-| Home Lab | Raspberry Pi, Linux, DNS/DHCP, SSH | My home network lab — Pi-hole ad-blocking, remote administration *(separate repo coming soon)* |
+| Home Lab | Raspberry Pi, Linux, DNS/DHCP, SSH | My home network lab — Pi-hole ad-blocking, remote administration |
 
 ---
 
