@@ -15,17 +15,14 @@ Hi! I'm Artiom, a junior developer from Vilnius, Lithuania — Game Development 
 
 **Engine:** Unity `[VERSION, e.g. 2022.3 LTS]` · **Language:** C# · **Status:** Playable build available
 
-[2–3 sentences: what the game is about, the player's goal, what makes it interesting.
-Example: "An incremental clicker where the player grows [X] from a single click to an automated empire. Built to practise core Unity workflows: UI, game state, and save/load."]
+An incremental clicker where the player grows [X] from a single click to an automated empire. Built to practise core Unity workflows: UI, game state, prestige mechanic.
 
 ### ✨ Features
 
 - Click-to-earn core gameplay loop
 - Upgrade shop with scaling prices
 - Passive / auto-income generators
-- [Prestige / reset mechanic — delete if not implemented]
-
-> ⚠️ Keep only what really works — recruiters do click the build.
+- Prestige / reset mechanic 
 
 ### ▶️ Play it
 
