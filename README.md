@@ -1,4 +1,3 @@
-[README_Portfolio_repo.md](https://github.com/user-attachments/files/30828738/README_Portfolio_repo.md)
 # Artiom Petkun — Project Portfolio
 
 Hi! I'm Artiom, a junior developer from Vilnius, Lithuania — Game Development graduate (Vilnius Business College, 2025). This repository collects my personal projects. Each folder is a self-contained project with its own docs and build.
