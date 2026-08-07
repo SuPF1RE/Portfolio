@@ -41,6 +41,9 @@ An incremental clicker where the player grows [X] from a single click to an auto
 - Balancing an economy curve
 - Version control with Git and large binary assets
 
+### Ongoing — commercial game project (private)
+Developing turn-based multiplayer in unity. Code is not public — happy to walk through the architecture and technical decisions in an interview.
+
 ---
 
 ## 📬 Contact
