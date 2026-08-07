@@ -23,22 +23,12 @@ Example: "An incremental clicker where the player grows [X] from a single click 
 - Click-to-earn core gameplay loop
 - Upgrade shop with scaling prices
 - Passive / auto-income generators
-- [Save/load system — delete if not implemented]
 - [Prestige / reset mechanic — delete if not implemented]
-- [Sound, settings, achievements — whatever actually exists]
 
 > ⚠️ Keep only what really works — recruiters do click the build.
 
-### 📸 Screenshots
-
-![Main gameplay](docs/screenshots/gameplay.png)
-![Upgrade shop](docs/screenshots/shop.png)
-
-▶️ **[Watch 30-sec gameplay GIF](docs/screenshots/gameplay.gif)**
-
 ### ▶️ Play it
 
-- **In browser (itch.io):** `[ADD LINK — upload a WebGL build to itch.io, it takes ~20 minutes]`
 - **Windows build:** see the `Build` folder inside `C#/Unity/Clicker game`
 
 ### 🛠 Run from source
@@ -50,21 +40,13 @@ Example: "An incremental clicker where the player grows [X] from a single click 
 
 ### 🧠 What I learned building this
 
-- [e.g. Unity UI system and event handling]
-- [e.g. managing game state and save/load with JSON]
-- [e.g. balancing an economy curve]
+- Unity UI system and event handling
+- Balancing an economy curve
 - [e.g. version control with Git and large binary assets]
-
-### 🗺 Roadmap
-
-- [ ] [Feature you plan to add next]
-- [ ] [Another idea]
-- [ ] Publish to itch.io ✅ *(check when done)*
 
 ---
 
 ## 📬 Contact
 
 - **Email:** mrgrom28@gmail.com
-- **LinkedIn:** `[ADD LINK]`
 - **Location:** Vilnius, Lithuania
