@@ -13,7 +13,7 @@ Hi! I'm Artiom, a junior developer from Vilnius, Lithuania — Game Development 
 
 ## 🎮 Clicker Game
 
-**Engine:** Unity 2022.3 LTS · **Language:** C# · **Status:** Playable build available
+**Engine:** Unity 6000.0.62f1 LTS · **Language:** C# · **Status:** Playable build available
 
 An incremental clicker where the player grows gold from a single click to an automated empire. Built to practise core Unity workflows: UI, game state, prestige mechanic.
 
