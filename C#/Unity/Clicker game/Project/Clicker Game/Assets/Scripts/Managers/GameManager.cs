@@ -13,10 +13,6 @@ public class GameManager : MonoBehaviour
     public CastleButton Castle;
     public float SettlementProduction;
     public float PlayerStrenght;
-
-    public GameObject TimberWorker;
-    public GameObject StoneQuarryWorker;
-    public GameObject MineWorker;
     public int WorkerSpeed;
 
     public float addedStrength;
@@ -33,7 +29,7 @@ public class GameManager : MonoBehaviour
     public float CheckStrength(float clonestrength) 
     {
         float Ratio = 0.5f + (Castle.Strength - clonestrength) / (2 * (Castle.Strength + clonestrength));
-        return MathF.Round(Ratio * 100f, 2) ;
+        return MathF.Round(Ratio * 100f, 2);
     }
     public float Roll() 
     {
@@ -44,7 +40,7 @@ public class GameManager : MonoBehaviour
     {
         if (Timber.Level != 0) 
         {
-            GameObject Workerclone = Instantiate(TimberWorker);
+            GameObject Workerclone = Instantiate(Timber.Worker);
             Workerclone.transform.position = Timber.transform.position;
             Vector3 pointB = new Vector3(-0.04f, 0, 0);
             Vector3 pointC = new Vector3(0, 0, 5);
@@ -52,7 +48,7 @@ public class GameManager : MonoBehaviour
         }
         if (StoneQuarry.Level != 0)
         {
-            GameObject Workerclone = Instantiate(StoneQuarryWorker);
+            GameObject Workerclone = Instantiate(StoneQuarry.Worker);
             Workerclone.transform.position = StoneQuarry.transform.position;
             Vector3 pointB = new Vector3(-0.04f, 0, 0);
             Vector3 pointC = new Vector3(0, 0, 5);
@@ -60,7 +56,7 @@ public class GameManager : MonoBehaviour
         }
         if (Mine.Level != 0)
         {
-            GameObject Workerclone = Instantiate(MineWorker);
+            GameObject Workerclone = Instantiate(Mine.Worker);
             Workerclone.transform.position = Mine.transform.position;
             Vector3 pointB = new Vector3(-0.04f, 0, 0);
             Vector3 pointC = new Vector3(0, 0, 5);

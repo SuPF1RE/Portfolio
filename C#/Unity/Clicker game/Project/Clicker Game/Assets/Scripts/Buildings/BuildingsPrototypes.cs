@@ -13,4 +13,5 @@ public abstract class BuildingsPrototypes : MonoBehaviour
     public GameObject skinLevel50;      
     public GameObject skinLevel100;     
     public Image Frame;
+    public GameObject Worker;
 }

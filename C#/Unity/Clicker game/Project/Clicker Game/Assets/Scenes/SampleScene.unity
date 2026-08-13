@@ -46349,6 +46349,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1613514590}
     - target: {fileID: 7788811920976109164, guid: 17b873a9b0408ef4d90e203b619016be, type: 3}
+      propertyPath: Worker
+      value: 
+      objectReference: {fileID: 5829560573939998946, guid: 8ecfe9a01b9470f4eaf84f350bc26318, type: 3}
+    - target: {fileID: 7788811920976109164, guid: 17b873a9b0408ef4d90e203b619016be, type: 3}
       propertyPath: manager
       value: 
       objectReference: {fileID: 1262905620}
@@ -46828,6 +46832,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 744685583}
     - target: {fileID: 7147607804564381419, guid: 153e2e2e637a5694ab95bd88c3dd9a3d, type: 3}
+      propertyPath: Worker
+      value: 
+      objectReference: {fileID: 3218453860550770622, guid: a3144a13b13b1844f803c61c6190e1b7, type: 3}
+    - target: {fileID: 7147607804564381419, guid: 153e2e2e637a5694ab95bd88c3dd9a3d, type: 3}
       propertyPath: manager
       value: 
       objectReference: {fileID: 1262905620}
@@ -46978,6 +46986,10 @@ PrefabInstance:
       propertyPath: Frame
       value: 
       objectReference: {fileID: 1249011583}
+    - target: {fileID: 7792194719070493887, guid: 9edb019347a3ce44bb5d5720eb36d447, type: 3}
+      propertyPath: Worker
+      value: 
+      objectReference: {fileID: 5246948000879322430, guid: 9cd8dd677c3907943a0d7af2bb7015d4, type: 3}
     - target: {fileID: 7792194719070493887, guid: 9edb019347a3ce44bb5d5720eb36d447, type: 3}
       propertyPath: manager
       value: 

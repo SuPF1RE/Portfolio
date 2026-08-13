@@ -49,9 +49,9 @@ public class EconomyManager : MonoBehaviour
             building.Level += levelAdd;
             building.NextCost = MathF.Round(building.BaseCost * (Mathf.Pow(GrowthRate, building.Level)), 2);
             buildingsAppearenceManager.UpdateAppearance();
-            return true; // покупка прошла   
+            return true; 
         }
-        return false; // не хватило монет
+        return false; 
     }
     public float MultipleLevelUp(int LevelsToBuy, float BaseCost, int Level, float totalcost)
     {
