@@ -1,0 +1,25 @@
+<linker>
+	<assembly fullname="Assembly-CSharp" ignoreIfMissing="1">
+		<type fullname="BattleManager">
+			<method name="StartBattle"/>
+		</type>
+		<type fullname="UIManager">
+			<method name="BuyCastleButtonClick"/>
+			<method name="BuyMineButtonClick"/>
+			<method name="BuyStoneQuarryButtonClick"/>
+			<method name="BuyTimberButtonClick"/>
+			<method name="CloseNotification"/>
+			<method name="MultipleLvlUp"/>
+			<method name="OnCastleAttackButtonPress"/>
+			<method name="OnCastleExitButtonPress"/>
+			<method name="OnCastleManageButtonPress"/>
+			<method name="OnCastleUpgradeButtonPress"/>
+			<method name="OnMenuButtonPress"/>
+			<method name="OnMenuExitButtonPress"/>
+			<method name="OnMenuResumeButtonPress"/>
+			<method name="OnMenuResumeButtonPress"/>
+			<method name="Reincarnation"/>
+			<method name="Restart"/>
+		</type>
+	</assembly>
+</linker>

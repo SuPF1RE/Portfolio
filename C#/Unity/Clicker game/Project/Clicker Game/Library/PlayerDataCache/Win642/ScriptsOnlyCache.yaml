@@ -173,73 +173,73 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1576}
+      Script: {instanceID: 8562}
     - Class: 114
-      Script: {instanceID: 1578}
+      Script: {instanceID: 8728}
     - Class: 114
-      Script: {instanceID: 8556}
+      Script: {instanceID: 8802}
     - Class: 114
-      Script: {instanceID: 8720}
+      Script: {instanceID: 8958}
     - Class: 114
-      Script: {instanceID: 8794}
+      Script: {instanceID: 9050}
     - Class: 114
-      Script: {instanceID: 8950}
+      Script: {instanceID: 9528}
     - Class: 114
-      Script: {instanceID: 9042}
+      Script: {instanceID: 9720}
     - Class: 114
-      Script: {instanceID: 9520}
+      Script: {instanceID: 9992}
     - Class: 114
-      Script: {instanceID: 9712}
+      Script: {instanceID: 10014}
     - Class: 114
-      Script: {instanceID: 9982}
+      Script: {instanceID: 10100}
     - Class: 114
-      Script: {instanceID: 10004}
+      Script: {instanceID: 10182}
     - Class: 114
-      Script: {instanceID: 10170}
+      Script: {instanceID: 10648}
     - Class: 114
-      Script: {instanceID: 10636}
+      Script: {instanceID: 10650}
     - Class: 114
-      Script: {instanceID: 10638}
+      Script: {instanceID: 10704}
     - Class: 114
-      Script: {instanceID: 10692}
+      Script: {instanceID: 10756}
     - Class: 114
-      Script: {instanceID: 10846}
+      Script: {instanceID: 10860}
     - Class: 114
-      Script: {instanceID: 11074}
-    - Class: 114
-      Script: {instanceID: 11462}
+      Script: {instanceID: 11090}
     - Class: 114
       Script: {instanceID: 11482}
     - Class: 114
-      Script: {instanceID: 12370}
+      Script: {instanceID: 11502}
     - Class: 114
-      Script: {instanceID: 12640}
+      Script: {instanceID: 12402}
     - Class: 114
-      Script: {instanceID: 13048}
+      Script: {instanceID: 12672}
     - Class: 114
-      Script: {instanceID: 13060}
+      Script: {instanceID: 13084}
     - Class: 114
-      Script: {instanceID: 13106}
+      Script: {instanceID: 13096}
     - Class: 114
-      Script: {instanceID: 13168}
+      Script: {instanceID: 13144}
     - Class: 114
-      Script: {instanceID: 13316}
+      Script: {instanceID: 13208}
     - Class: 114
-      Script: {instanceID: 13406}
+      Script: {instanceID: 13358}
     - Class: 114
-      Script: {instanceID: 13840}
+      Script: {instanceID: 13452}
     - Class: 114
-      Script: {instanceID: 14190}
+      Script: {instanceID: 13894}
     - Class: 114
-      Script: {instanceID: 14230}
+      Script: {instanceID: 14248}
     - Class: 114
       Script: {instanceID: 14288}
     - Class: 114
-      Script: {instanceID: 15086}
+      Script: {instanceID: 14346}
     - Class: 114
-      Script: {instanceID: 15308}
+      Script: {instanceID: 15144}
     - Class: 114
-      Script: {instanceID: 15412}
+      Script: {instanceID: 15366}
+    - Class: 114
+      Script: {instanceID: 15470}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -261,79 +261,7 @@ ScriptsOnlyBuild:
   scriptHashData:
   - hash:
       serializedVersion: 2
-      Hash: 46051527b57d70599f8ee283aab85568
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: BattleManager
-  - hash:
-      serializedVersion: 2
-      Hash: f33161a9b52f71db0df86c3fb9e448c6
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: Battle
-  - hash:
-      serializedVersion: 2
-      Hash: 216f6c07bfa250e44b3e8d62572474e8
-    assemblyName: Assembly-CSharp
-    namespaceName: TMPro.Examples
-    className: Benchmark01
-  - hash:
-      serializedVersion: 2
-      Hash: 35e0b31791c377513b6fc7b9568c50cd
-    assemblyName: Assembly-CSharp
-    namespaceName: TMPro.Examples
-    className: Benchmark02
-  - hash:
-      serializedVersion: 2
-      Hash: 11a492830b189fafb9ed2f7afa464c56
-    assemblyName: Assembly-CSharp
-    namespaceName: TMPro.Examples
-    className: SimpleScript
-  - hash:
-      serializedVersion: 2
-      Hash: 9eccc4340fcd994586e0dcb134c4612e
-    assemblyName: Assembly-CSharp
-    namespaceName: TMPro.Examples
-    className: TeleType
-  - hash:
-      serializedVersion: 2
-      Hash: 593a641cd7822a10b9a54aa9eb5c3d5e
-    assemblyName: Assembly-CSharp
-    namespaceName: TMPro.Examples
-    className: Benchmark04
-  - hash:
-      serializedVersion: 2
-      Hash: 418b67019f13f9684552f2693bae3971
-    assemblyName: Assembly-CSharp
-    namespaceName: TMPro.Examples
-    className: TextMeshProFloatingText
-  - hash:
-      serializedVersion: 2
-      Hash: 7fdd3ee28e9042c3ec83463d0bb3b230
-    assemblyName: Assembly-CSharp
-    namespaceName: TMPro.Examples
-    className: TMP_FrameRateCounter
-  - hash:
-      serializedVersion: 2
-      Hash: 9fb1c3ab48b256d508ecddd967f98652
-    assemblyName: Assembly-CSharp
-    namespaceName: TMPro.Examples
-    className: VertexZoom
-  - hash:
-      serializedVersion: 2
-      Hash: 665da785348a8806bf1524fe10742a60
-    assemblyName: Assembly-CSharp
-    namespaceName: TMPro.Examples
-    className: TMP_UiFrameRateCounter
-  - hash:
-      serializedVersion: 2
-      Hash: e2734bcc7b3e94776ade5d59f54fec1e
-    assemblyName: Assembly-CSharp
-    namespaceName: TMPro.Examples
-    className: TMP_TextSelector_B
-  - hash:
-      serializedVersion: 2
-      Hash: caeecc696585cc736d7c4a60c2a9cde0
+      Hash: d574652791c81843d98812800c61c699
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: Mine
@@ -381,7 +309,7 @@ ScriptsOnlyBuild:
     className: Variables
   - hash:
       serializedVersion: 2
-      Hash: 447d5facfc1ec124063a8cac5d484314
+      Hash: f783b33dbb58475431a770c024b730a5
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: CastleButton
@@ -513,7 +441,7 @@ ScriptsOnlyBuild:
     className: Outline
   - hash:
       serializedVersion: 2
-      Hash: bd57c61f1e4aa8c7ff644b6d47308910
+      Hash: c4892b3ff1dd52db67e81c41dff9b577
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: Timber
@@ -523,6 +451,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro
     namespaceName: TMPro
     className: TMP_ScrollbarEventHandler
+  - hash:
+      serializedVersion: 2
+      Hash: 9eccc4340fcd994586e0dcb134c4612e
+    assemblyName: Assembly-CSharp
+    namespaceName: TMPro.Examples
+    className: TeleType
   - hash:
       serializedVersion: 2
       Hash: 8bf800a764665b085fe469e8aea7f167
@@ -583,6 +517,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp
     namespaceName: TMPro.Examples
     className: Benchmark03
+  - hash:
+      serializedVersion: 2
+      Hash: f33161a9b52f71db0df86c3fb9e448c6
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: Battle
   - hash:
       serializedVersion: 2
       Hash: ee34255e3e86289bde9bad5e07b84cbc
@@ -651,7 +591,7 @@ ScriptsOnlyBuild:
     className: EventSystem
   - hash:
       serializedVersion: 2
-      Hash: bcd38e2560a2e788805b72fcfc060975
+      Hash: ab7e6a9203531d6e012b7c54e15035ea
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: GameManager
@@ -667,6 +607,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: BigNumberNormalizer
+  - hash:
+      serializedVersion: 2
+      Hash: 46051527b57d70599f8ee283aab85568
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: BattleManager
   - hash:
       serializedVersion: 2
       Hash: 0b63f6d3335e11939ce8790b904c8691
@@ -787,6 +733,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro
     namespaceName: TMPro
     className: TextContainer
+  - hash:
+      serializedVersion: 2
+      Hash: 7fdd3ee28e9042c3ec83463d0bb3b230
+    assemblyName: Assembly-CSharp
+    namespaceName: TMPro.Examples
+    className: TMP_FrameRateCounter
   - hash:
       serializedVersion: 2
       Hash: 6237e444519f74a8c5695a991457e521
@@ -1047,6 +999,12 @@ ScriptsOnlyBuild:
     className: BuildingsAppearenceManager
   - hash:
       serializedVersion: 2
+      Hash: 11a492830b189fafb9ed2f7afa464c56
+    assemblyName: Assembly-CSharp
+    namespaceName: TMPro.Examples
+    className: SimpleScript
+  - hash:
+      serializedVersion: 2
       Hash: b12640dfdb5966813e9dd838893e6c4a
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
@@ -1077,6 +1035,12 @@ ScriptsOnlyBuild:
     className: UnityOnCollisionEnterMessageListener
   - hash:
       serializedVersion: 2
+      Hash: 593a641cd7822a10b9a54aa9eb5c3d5e
+    assemblyName: Assembly-CSharp
+    namespaceName: TMPro.Examples
+    className: Benchmark04
+  - hash:
+      serializedVersion: 2
       Hash: 715f7928b39881049ce8c46350cb8681
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
@@ -1101,6 +1065,12 @@ ScriptsOnlyBuild:
     className: ShaderPropAnimator
   - hash:
       serializedVersion: 2
+      Hash: 35e0b31791c377513b6fc7b9568c50cd
+    assemblyName: Assembly-CSharp
+    namespaceName: TMPro.Examples
+    className: Benchmark02
+  - hash:
+      serializedVersion: 2
       Hash: 540882762544409cc4530e60db00e951
     assemblyName: UnityEngine.UI
     namespaceName: UnityEngine.UI
@@ -1113,6 +1083,12 @@ ScriptsOnlyBuild:
     className: UnityOnPointerEnterMessageListener
   - hash:
       serializedVersion: 2
+      Hash: e2734bcc7b3e94776ade5d59f54fec1e
+    assemblyName: Assembly-CSharp
+    namespaceName: TMPro.Examples
+    className: TMP_TextSelector_B
+  - hash:
+      serializedVersion: 2
       Hash: 00eef92bf387da2c9009267123d9d674
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
@@ -1123,6 +1099,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI
     namespaceName: UnityEngine.UI
     className: InputField
+  - hash:
+      serializedVersion: 2
+      Hash: 418b67019f13f9684552f2693bae3971
+    assemblyName: Assembly-CSharp
+    namespaceName: TMPro.Examples
+    className: TextMeshProFloatingText
   - hash:
       serializedVersion: 2
       Hash: ca7965796a6fc0e5baad4cb19f5b5ded
@@ -1149,6 +1131,12 @@ ScriptsOnlyBuild:
     className: VertexColorCycler
   - hash:
       serializedVersion: 2
+      Hash: 216f6c07bfa250e44b3e8d62572474e8
+    assemblyName: Assembly-CSharp
+    namespaceName: TMPro.Examples
+    className: Benchmark01
+  - hash:
+      serializedVersion: 2
       Hash: 4fcf0bb4aff1d14a1dfcdedc4b07bd05
     assemblyName: UnityEngine.UI
     namespaceName: UnityEngine.EventSystems
@@ -1171,6 +1159,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI
     namespaceName: UnityEngine.UI
     className: RawImage
+  - hash:
+      serializedVersion: 2
+      Hash: 665da785348a8806bf1524fe10742a60
+    assemblyName: Assembly-CSharp
+    namespaceName: TMPro.Examples
+    className: TMP_UiFrameRateCounter
   - hash:
       serializedVersion: 2
       Hash: b747f5d40674055dd70e18552f1b0447
@@ -1225,6 +1219,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline
     namespaceName: UnityEngine.Timeline
     className: AudioPlayableAsset
+  - hash:
+      serializedVersion: 2
+      Hash: 9fb1c3ab48b256d508ecddd967f98652
+    assemblyName: Assembly-CSharp
+    namespaceName: TMPro.Examples
+    className: VertexZoom
   - hash:
       serializedVersion: 2
       Hash: 1d830bc5cfaaf24301dffea2877f4bea
@@ -1341,11 +1341,11 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   - hash:
       serializedVersion: 2
-      Hash: 25dc99b17c87bf76a02f8811ff503e58
+      Hash: dbc900834c10daa8da0ebad3e1eebef4
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: StoneQuarry
   platform: 19
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
-  playerPath: C:/games/unity/diplom/builds/Final build/Clicker Game.exe
+  playerPath: C:/project/Portfolio/C#/Unity/Clicker game/Build/Clicker Game.exe
