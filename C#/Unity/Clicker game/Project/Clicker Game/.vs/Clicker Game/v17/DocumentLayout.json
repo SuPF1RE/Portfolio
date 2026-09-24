@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "C:\\project\\Portfolio\\C#\\Unity\\Clicker game\\Project\\Clicker Game\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{BB8C2F16-AD79-3BDB-2C8D-571B30F067CD}|Assembly-CSharp.csproj|c:\\project\\portfolio\\c#\\unity\\clicker game\\project\\clicker game\\assets\\scripts\\managers\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB8C2F16-AD79-3BDB-2C8D-571B30F067CD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\managers\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB8C2F16-AD79-3BDB-2C8D-571B30F067CD}|Assembly-CSharp.csproj|c:\\project\\portfolio\\c#\\unity\\clicker game\\project\\clicker game\\assets\\scripts\\buildings\\castlebutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB8C2F16-AD79-3BDB-2C8D-571B30F067CD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\buildings\\castlebutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{BB8C2F16-AD79-3BDB-2C8D-571B30F067CD}|Assembly-CSharp.csproj|c:\\project\\portfolio\\c#\\unity\\clicker game\\project\\clicker game\\assets\\scripts\\buildings\\buildingsprototypes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BB8C2F16-AD79-3BDB-2C8D-571B30F067CD}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\buildings\\buildingsprototypes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -14,11 +22,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
+              "Title": "CastleButton.cs",
+              "DocumentMoniker": "C:\\project\\Portfolio\\C#\\Unity\\Clicker game\\Project\\Clicker Game\\Assets\\Scripts\\Buildings\\CastleButton.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Buildings\\CastleButton.cs",
+              "ToolTip": "C:\\project\\Portfolio\\C#\\Unity\\Clicker game\\Project\\Clicker Game\\Assets\\Scripts\\Buildings\\CastleButton.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Buildings\\CastleButton.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-24T16:41:36.975Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "BuildingsPrototypes.cs",
               "DocumentMoniker": "C:\\project\\Portfolio\\C#\\Unity\\Clicker game\\Project\\Clicker Game\\Assets\\Scripts\\Buildings\\BuildingsPrototypes.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Buildings\\BuildingsPrototypes.cs",
@@ -27,6 +48,19 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-08-13T08:38:50.497Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UIManager.cs",
+              "DocumentMoniker": "C:\\project\\Portfolio\\C#\\Unity\\Clicker game\\Project\\Clicker Game\\Assets\\Scripts\\Managers\\UIManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Managers\\UIManager.cs",
+              "ToolTip": "C:\\project\\Portfolio\\C#\\Unity\\Clicker game\\Project\\Clicker Game\\Assets\\Scripts\\Managers\\UIManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Managers\\UIManager.cs",
+              "ViewState": "AgIAAFgAAAAAAAAAAAA0wGQAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-24T16:42:52.878Z",
               "EditorCaption": ""
             }
           ]
