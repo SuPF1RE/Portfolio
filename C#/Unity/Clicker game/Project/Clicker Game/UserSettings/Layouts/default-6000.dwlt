@@ -152,7 +152,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 150}
   m_MaxSize: {x: 32384, y: 24288}
   vertical: 1
-  controlID: 56
+  controlID: 136
   draggingID: 0
 --- !u!114 &7
 MonoBehaviour:
@@ -206,7 +206,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 100}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 57
+  controlID: 137
   draggingID: 0
 --- !u!114 &9
 MonoBehaviour:
@@ -227,8 +227,8 @@ MonoBehaviour:
     y: 0
     width: 540
     height: 1087
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 76}
+  m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -963,7 +963,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.14426197, y: -0.18234597, z: 0.027057331, w: -0.9722181}
     speed: 2
-    m_Value: {x: -0.14426185, y: -0.18234582, z: 0.027057309, w: -0.97221726}
+    m_Value: {x: -0.14426197, y: -0.18234597, z: 0.027057331, w: -0.9722181}
   m_Size:
     m_Target: 125.54011
     speed: 2
@@ -1098,18 +1098,18 @@ MonoBehaviour:
     m_ExpandedIDs: ffffffff000000007a9700007c9700007e97000080970000829700008497000086970000889700008a9700008c9700008e97000090970000929700009497000096970000989700009a9700009c9700009e970000a0970000a2970000a4970000a6970000a8970000aa970000ac970000ae970000b0970000b2970000b4970000b6970000b8970000ba970000bc970000be970000c0970000c2970000c4970000c6970000c8970000ca970000cc970000ce970000d0970000d2970000d4970000d6970000d8970000da970000dc970000de970000e0970000e2970000e4970000e6970000e8970000ea970000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Enemy Image BackUp
-      m_OriginalName: Enemy Image BackUp
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 35034
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_TrimLeadingAndTrailingWhitespace: 0
       m_ClientGUIView: {fileID: 4}
@@ -1243,7 +1243,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 4a9afeff629afeff58c4feff24c9feff3cc9feff66f3feffc820ffffc05affff28fbffffca7d0000f27d00006c7e0000807e0000ae7e0000528000000c8100002c8100009a8100001c83000022830000c88300007084000060850000c8850000e8850000c28600009a8700001e880000
+      m_ExpandedIDs: 28fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
