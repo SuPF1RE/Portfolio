@@ -33,7 +33,7 @@ An incremental clicker where the player grows gold from a single click to an aut
 1. Clone this repository
 2. In Unity Hub: **Add → Add project from disk** → select `C#/Unity/Clicker game`
 3. Open with Unity 
-4. Open the main scene (`Assets/Scenes/Main.unity`)
+4. Open the main scene (`Assets/Scenes/SampleScene.unity`)
 
 ### 🧠 What I learned building this
 
