@@ -1,0 +1,24 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+			 xmlns:d="https://github.com/avaloniaui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:vm="clr-namespace:Test.ViewModels"
+			 xmlns:dataGrid="clr-namespace:Avalonia.Controls;assembly=Avalonia.Controls.DataGrid"
+			 x:DataType="vm:ProductListPageViewModel"
+			 x:Class="Test.Views.ProductListPageView">
+	<DockPanel Margin="10">
+		<StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Spacing="5">
+			<Button Content="Add" Command="{Binding AddProduct}" />
+			<Button Content="Edit" Command="{Binding EditProduct}" IsEnabled="{Binding SelectedProduct}" />
+			<Button Content="Delete" Command="{Binding DeleteProduct}" IsEnabled="{Binding SelectedProduct}" />
+		</StackPanel>
+		<DataGrid IsReadOnly="True" GridLinesVisibility="All" BorderThickness="1" BorderBrush="Black" 
+				  ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedProduct}" 
+				  AutoGenerateColumns="False">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+				<DataGridTextColumn Header="Price" Binding="{Binding Price}" />
+				<DataGridTextColumn Header="Description" Binding="{Binding Description}" />
+			</DataGrid.Columns>
+		</DataGrid>
+	</DockPanel>
+</UserControl>

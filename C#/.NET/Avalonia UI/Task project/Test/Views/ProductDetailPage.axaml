@@ -1,0 +1,33 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:d="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:vm="clr-namespace:Test.ViewModels"
+	         xmlns:views="clr-namespace:Test.Views"
+			 xmlns:dataGrid="clr-namespace:Avalonia.Controls;assembly=Avalonia.Controls.DataGrid"
+			 x:DataType="vm:ProductDetailViewModel"
+	         x:Class="Test.Views.ProductDetailView">
+	<StackPanel Margin="10" Spacing="10">
+		<TextBlock Text="Product Details" FontSize="18" />
+
+		<TextBox Watermark="Name" Text="{Binding Name, Mode=TwoWay}" />
+		<TextBox Watermark="Price" Text="{Binding Price, Mode=TwoWay}" />
+		<TextBox Watermark="Description" Text="{Binding Description, Mode=TwoWay}" AcceptsReturn="True" />
+		<TextBlock Text="Category" FontSize="13" />
+
+		<DataGrid  SelectedItem="{Binding SelectedVariant, Mode=TwoWay}" ItemsSource="{Binding Variants}" AutoGenerateColumns="False" IsReadOnly="False">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Category" Binding="{Binding Attribute}" />
+				<DataGridTextColumn Header="Value" Binding="{Binding Value}" />
+				<DataGridCheckBoxColumn Header="Is selected" Binding="{Binding isSelected}" />
+			</DataGrid.Columns>
+		</DataGrid>
+		<StackPanel Orientation="Horizontal" Spacing="5">
+			<Button Content="Add" Command="{Binding AddVariant}" />
+			<Button Content="Delete" Command="{Binding DeleteVariant}" />
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Spacing="5">
+			<Button Content="Save" Command="{Binding SaveCommand}" />
+			<Button Content="Cancel" Command="{Binding Cancel}" />
+		</StackPanel>
+	</StackPanel>
+</UserControl>
