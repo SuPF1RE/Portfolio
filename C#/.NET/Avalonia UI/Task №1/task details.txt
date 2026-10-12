@@ -1,0 +1,85 @@
+Build a Multi-Page Product Management Application
+
+Task
+
+Create a desktop application using Avalonia UI framework that allows users to manage a list of products. The app should include navigation between a products list view and a product detail view, supporting CRUD operations with validation, styling, and user feedback.
+
+For more information * https://docs.avaloniaui.net/docs/basics/ * https://docs.avaloniaui.net/docs/guides/development-guides/data-validation * https://docs.avaloniaui.net/docs/basics/user-interface/styling/styles
+
+Note
+
+If you are facing any difficulties with this task, feel free to finish task as best as you can, just state the issues faced in your submission.
+
+Requirements
+
+1. Application Structure
+
+Implement a Main Window with a navigation container (e.g., Frame) that loads different pages.
+Create two main pages:
+Product List Page: Displays a list of products with options to add, edit, or delete.
+Product Details Page: Show detailed fields for a product with options to save or cancel.
+2. UI Design (XAML)
+
+Product List Page
+Use a DataGrid or ListBox (or another suitable control) to display product entries with basic information such as Name, Price, Description and etc. (you may choose additional information displayed to user) .
+Include buttons:
+Add: Opens the details page with empty fields.
+Edit: Loads selected product data into the form.
+Delete: Prompts for confirmation before removing.
+Product Details Page
+Include input controls (TextBox, ComboBox, etc.) for:
+Name (required)
+Price (numeric, length, format)
+Description (optional)
+Variants (optional, global)
+Product variants are the attributes used to identify specific product like size, color
+
+Include functions:
+Add new variant
+Edit selected variant
+Delete selected variant
+Add variant options (optional, global)
+Variant option are specific attribute value like M for size, blue for color
+
+Add variant options (optional, global)
+Edit variant options (optional, global)
+Delete variant options (optional, global)
+Assign selected variant options to product
+Defines that product only has specific variant options for choosing
+
+Any additional fields of your choosing (required/optional)
+Show validation errors inline.
+Buttons for:
+Save: Enabled only if all validations pass.
+Cancel: Return to list without saving.
+3. Data & ViewModels
+
+Create a Product model with properties:
+Use ObservableCollection<Product> in the list ViewModel.
+Implement two ViewModels:
+ProductListViewModel
+Manages list, commands for Add, Edit, Delete.
+ProductDetailViewModel
+Manages current product data, validation, Save/Cancel logic.
+Use data binding for all UI controls to ViewModel properties.
+Implement INotifyPropertyChanged and validation mechanisms.
+4. Validation & User Feedback
+
+Validate:
+Name: Not empty.
+Price: Numeric, specific length.
+Show validation messages next to the respective fields.
+Disable Save button until all validations are successful.
+Confirm deletion with a dialog.
+5. Navigation & User Interaction
+
+Clicking Add loads a blank product form.
+Clicking Edit loads selected product data.
+Clicking Delete shows confirmation, then removes product.
+Save updates the list and navigates back to the list page.
+Cancel discards changes and returns to list.
+6. Styling & UX
+
+Apply consistent styles for spacing, fonts, and colors.
+Highlight validation errors with red borders or text.
+Use dialog boxes for confirmations.

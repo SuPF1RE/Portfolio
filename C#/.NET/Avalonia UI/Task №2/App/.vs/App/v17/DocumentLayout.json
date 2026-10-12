@@ -1,0 +1,102 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\project\\Portfolio\\C#\\.NET\\Avalonia UI\\Task \u21162\\App\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{50E0A47D-2B50-4E34-959C-E64C92619933}|App\\App.csproj|c:\\project\\portfolio\\c#\\.net\\avalonia ui\\task \u21162\\app\\app\\services\\databaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{50E0A47D-2B50-4E34-959C-E64C92619933}|App\\App.csproj|solutionrelative:app\\services\\databaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{50E0A47D-2B50-4E34-959C-E64C92619933}|App\\App.csproj|c:\\project\\portfolio\\c#\\.net\\avalonia ui\\task \u21162\\app\\app\\services\\threadgeneratorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{50E0A47D-2B50-4E34-959C-E64C92619933}|App\\App.csproj|solutionrelative:app\\services\\threadgeneratorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{50E0A47D-2B50-4E34-959C-E64C92619933}|App\\App.csproj|c:\\project\\portfolio\\c#\\.net\\avalonia ui\\task \u21162\\app\\app\\views\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{50E0A47D-2B50-4E34-959C-E64C92619933}|App\\App.csproj|solutionrelative:app\\views\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{50E0A47D-2B50-4E34-959C-E64C92619933}|App\\App.csproj|c:\\project\\portfolio\\c#\\.net\\avalonia ui\\task \u21162\\app\\app\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{50E0A47D-2B50-4E34-959C-E64C92619933}|App\\App.csproj|solutionrelative:app\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{50E0A47D-2B50-4E34-959C-E64C92619933}|App\\App.csproj|c:\\project\\portfolio\\c#\\.net\\avalonia ui\\task \u21162\\app\\app\\viewmodels\\relaycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{50E0A47D-2B50-4E34-959C-E64C92619933}|App\\App.csproj|solutionrelative:app\\viewmodels\\relaycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 208,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "RelayCommand.cs",
+              "DocumentMoniker": "C:\\project\\Portfolio\\C#\\.NET\\Avalonia UI\\Task \u21162\\App\\App\\ViewModels\\RelayCommand.cs",
+              "RelativeDocumentMoniker": "App\\ViewModels\\RelayCommand.cs",
+              "ToolTip": "C:\\project\\Portfolio\\C#\\.NET\\Avalonia UI\\Task \u21162\\App\\App\\ViewModels\\RelayCommand.cs",
+              "RelativeToolTip": "App\\ViewModels\\RelayCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-29T09:52:12.19Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainViewModel.cs",
+              "DocumentMoniker": "C:\\project\\Portfolio\\C#\\.NET\\Avalonia UI\\Task \u21162\\App\\App\\ViewModels\\MainViewModel.cs",
+              "RelativeDocumentMoniker": "App\\ViewModels\\MainViewModel.cs",
+              "ToolTip": "C:\\project\\Portfolio\\C#\\.NET\\Avalonia UI\\Task \u21162\\App\\App\\ViewModels\\MainViewModel.cs",
+              "RelativeToolTip": "App\\ViewModels\\MainViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-28T14:44:25.22Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DatabaseService.cs",
+              "DocumentMoniker": "C:\\project\\Portfolio\\C#\\.NET\\Avalonia UI\\Task \u21162\\App\\App\\Services\\DatabaseService.cs",
+              "RelativeDocumentMoniker": "App\\Services\\DatabaseService.cs",
+              "ToolTip": "C:\\project\\Portfolio\\C#\\.NET\\Avalonia UI\\Task \u21162\\App\\App\\Services\\DatabaseService.cs",
+              "RelativeToolTip": "App\\Services\\DatabaseService.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAQwAAAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-28T14:44:13.256Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ThreadGeneratorService.cs",
+              "DocumentMoniker": "C:\\project\\Portfolio\\C#\\.NET\\Avalonia UI\\Task \u21162\\App\\App\\Services\\ThreadGeneratorService.cs",
+              "RelativeDocumentMoniker": "App\\Services\\ThreadGeneratorService.cs",
+              "ToolTip": "C:\\project\\Portfolio\\C#\\.NET\\Avalonia UI\\Task \u21162\\App\\App\\Services\\ThreadGeneratorService.cs",
+              "RelativeToolTip": "App\\Services\\ThreadGeneratorService.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAgwCUAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-28T14:43:59.963Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\project\\Portfolio\\C#\\.NET\\Avalonia UI\\Task \u21162\\App\\App\\Views\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "App\\Views\\MainWindow.xaml",
+              "ToolTip": "C:\\project\\Portfolio\\C#\\.NET\\Avalonia UI\\Task \u21162\\App\\App\\Views\\MainWindow.xaml",
+              "RelativeToolTip": "App\\Views\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-01-28T14:44:48.13Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
