@@ -1,0 +1,2859 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <meta name="theme-color" content="#0b1823" />
+    <title>Ether Sails — A Spacefaring Adventure</title>
+    <style>
+      :root {
+        --gold: #e9c88c;
+        --muted: #96aeb4;
+        --ink: #0b1b26;
+        --line: rgba(219, 211, 174, 0.2);
+        --mint: #84dfcf;
+        --glass: rgba(11, 26, 37, 0.91);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #08131e;
+        color: #f2ebd8;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      button {
+        font: inherit;
+        cursor: pointer;
+        color: inherit;
+      }
+      button:focus-visible {
+        outline: 2px solid var(--mint);
+        outline-offset: 4px;
+      }
+      button:disabled {
+        cursor: default;
+      }
+      #world {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        touch-action: none;
+        cursor: crosshair;
+      }
+      #shade {
+        pointer-events: none;
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, #07121bd9, transparent 20%, transparent 80%, #07121bb3);
+      }
+      .hud {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+      }
+      .hud button,
+      .interactive {
+        pointer-events: auto;
+      }
+      .top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 24px 30px;
+      }
+      .brand {
+        display: flex;
+        gap: 13px;
+        align-items: center;
+      }
+      .emblem {
+        font-size: 34px;
+        color: var(--gold);
+        width: 43px;
+      }
+      .brand h1 {
+        font-family: Georgia, serif;
+        font-weight: normal;
+        letter-spacing: 1px;
+        font-size: 23px;
+        margin: 0;
+      }
+      .eyebrow {
+        font-size: 9px;
+        letter-spacing: 3px;
+        color: var(--gold);
+        text-transform: uppercase;
+      }
+      .brand .eyebrow {
+        margin-top: 6px;
+        color: var(--muted);
+        letter-spacing: 2.5px;
+      }
+      .sector {
+        text-align: center;
+      }
+      .sector strong {
+        font:
+          17px Georgia,
+          serif;
+        display: block;
+        margin-top: 6px;
+        color: #d3e1df;
+      }
+      .right {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .coin {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        background: var(--glass);
+        border: 1px solid var(--line);
+        border-radius: 9px;
+        padding: 10px 20px;
+        min-width: 134px;
+      }
+      .coin i {
+        font-style: normal;
+        font-size: 23px;
+        color: var(--gold);
+      }
+      .coin b {
+        font-size: 22px;
+        font-weight: 500;
+        font-variant-numeric: tabular-nums;
+      }
+      .coin small {
+        display: block;
+        font-size: 8px;
+        letter-spacing: 2px;
+        color: var(--muted);
+        margin-top: 3px;
+      }
+      .iconbtn {
+        height: 42px;
+        width: 42px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--glass);
+        color: #c2d1d1;
+        font-size: 18px;
+      }
+      .iconbtn:hover {
+        background: #27414b;
+        color: var(--gold);
+      }
+      .quest {
+        position: absolute;
+        left: 30px;
+        top: 109px;
+        width: 312px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: linear-gradient(130deg, #142b37ed, #0c1d2bef);
+        padding: 20px 22px;
+        box-shadow: 0 10px 35px #0002;
+      }
+      .questtop {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 9px;
+        letter-spacing: 2px;
+        color: var(--gold);
+      }
+      #qNum {
+        color: var(--muted);
+        letter-spacing: 1px;
+      }
+      .quest h2 {
+        font:
+          23px/1.2 Georgia,
+          serif;
+        margin: 15px 0 10px;
+      }
+      .quest p {
+        font-size: 12px;
+        color: #afc3c8;
+        line-height: 1.65;
+        margin: 0 0 14px;
+        min-height: 40px;
+      }
+      .questline {
+        display: flex;
+        justify-content: space-between;
+        font-size: 10px;
+        color: var(--muted);
+        margin: 12px 0 8px;
+      }
+      .questline b {
+        color: var(--gold);
+        font-weight: normal;
+      }
+      .bar {
+        height: 4px;
+        border-radius: 9px;
+        background: #ffffff10;
+        overflow: hidden;
+      }
+      .bar > div {
+        height: 100%;
+        background: var(--mint);
+        transition: width 0.2s;
+      }
+      .quest .bar > div {
+        background: linear-gradient(90deg, #8cbbaf, var(--gold));
+      }
+      .qaction {
+        margin-top: 14px;
+        background: #e5c48b;
+        color: #152633;
+        width: 100%;
+        border: 0;
+        padding: 11px;
+        border-radius: 5px;
+        font-size: 12px;
+        font-weight: bold;
+      }
+      .qaction:hover {
+        background: #fce0a8;
+      }
+      .qaction[hidden] {
+        display: none;
+      }
+      .reward {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 12px;
+        color: var(--muted);
+        font-size: 10px;
+      }
+      .reward span:last-child {
+        color: var(--gold);
+      }
+      .bottom {
+        position: absolute;
+        left: 30px;
+        bottom: 26px;
+        display: flex;
+        gap: 12px;
+        align-items: end;
+      }
+      .upgradebtn {
+        border: 1px solid #b5986290;
+        background: linear-gradient(140deg, #233846, #142934);
+        border-radius: 10px;
+        padding: 15px 24px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        text-align: left;
+        box-shadow: 0 6px 28px #0005;
+      }
+      .upgradebtn:hover {
+        background: #2b4653;
+      }
+      .upgradebtn .symbol {
+        font-size: 25px;
+        color: var(--gold);
+      }
+      .upgradebtn strong {
+        display: block;
+        font:
+          18px Georgia,
+          serif;
+      }
+      .upgradebtn small {
+        display: block;
+        margin-top: 5px;
+        color: var(--muted);
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+      .key {
+        font-size: 10px;
+        border: 1px solid var(--line);
+        padding: 4px 6px;
+        border-radius: 4px;
+        margin-left: 8px;
+        color: var(--muted);
+      }
+      .shiphud {
+        position: absolute;
+        bottom: 27px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 310px;
+        text-align: center;
+      }
+      .activity {
+        font-size: 11px;
+        letter-spacing: 0.5px;
+        color: var(--mint);
+        margin-bottom: 12px;
+        text-shadow: 0 2px 5px #000;
+      }
+      .cargo {
+        padding: 15px 20px 13px;
+        background: var(--glass);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+      }
+      .cargohead {
+        display: flex;
+        justify-content: space-between;
+        font-size: 10px;
+        letter-spacing: 1px;
+        margin-bottom: 10px;
+        color: var(--muted);
+      }
+      .cargohead b {
+        color: #ece2c7;
+        font-size: 12px;
+      }
+      .manifest {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 9px;
+        font-size: 10px;
+        color: #abc0c5;
+      }
+      .manifest em {
+        font-style: normal;
+        color: var(--gold);
+      }
+      .minimap {
+        position: absolute;
+        right: 30px;
+        bottom: 26px;
+        width: 196px;
+        background: var(--glass);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 12px;
+      }
+      .maptitle {
+        display: flex;
+        justify-content: space-between;
+        font-size: 8px;
+        letter-spacing: 2px;
+        color: var(--muted);
+      }
+      #map {
+        display: block;
+        width: 170px;
+        height: 94px;
+        margin-top: 7px;
+        pointer-events: auto;
+        cursor: pointer;
+      }
+      .mapfoot {
+        font-size: 8px;
+        color: #6e919f;
+        text-align: center;
+        letter-spacing: 1px;
+      }
+      .controls {
+        position: absolute;
+        left: 30px;
+        bottom: 115px;
+        font-size: 10px;
+        color: #90adb5;
+      }
+      .controls b {
+        color: #c8d6d5;
+        font-weight: normal;
+      }
+      .toast {
+        position: absolute;
+        left: 50%;
+        top: 108px;
+        transform: translateX(-50%) translateY(-8px);
+        background: #112e36f2;
+        border: 1px solid #83c8b15c;
+        border-radius: 8px;
+        padding: 13px 22px;
+        max-width: 430px;
+        text-align: center;
+        font-size: 12px;
+        opacity: 0;
+        transition:
+          opacity 0.25s,
+          transform 0.25s;
+        pointer-events: none;
+        box-shadow: 0 6px 25px #0005;
+      }
+      .toast.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+      .toast strong {
+        display: block;
+        color: var(--gold);
+        font:
+          18px Georgia,
+          serif;
+        margin-top: 4px;
+      }
+      .modal {
+        position: absolute;
+        inset: 0;
+        background: #06121bc9;
+        backdrop-filter: blur(9px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        padding: 24px;
+      }
+      .modal[hidden] {
+        display: none;
+      }
+      .panel {
+        width: 570px;
+        max-height: 90vh;
+        overflow: auto;
+        padding: 32px;
+        border: 1px solid #c5b38344;
+        border-radius: 16px;
+        background: linear-gradient(145deg, #17303d, #0a1b29);
+        box-shadow: 0 30px 90px #0007;
+        position: relative;
+      }
+      .panel .close {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+      }
+      .panel h2 {
+        font:
+          34px Georgia,
+          serif;
+        margin: 12px 0;
+      }
+      .panel .desc {
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.7;
+      }
+      .upgrid {
+        display: grid;
+        gap: 9px;
+        margin-top: 24px;
+      }
+      .upcard {
+        display: grid;
+        grid-template-columns: 38px 1fr auto;
+        gap: 13px;
+        align-items: center;
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #07162066;
+      }
+      .upicon {
+        font-size: 28px;
+        color: var(--gold);
+      }
+      .upcard h3 {
+        font:
+          17px Georgia,
+          serif;
+        margin: 4px 0 5px;
+      }
+      .upcard p {
+        font-size: 10px;
+        color: var(--muted);
+        line-height: 1.5;
+        margin: 0;
+      }
+      .upcard .eyebrow {
+        font-size: 7px;
+        letter-spacing: 1.5px;
+      }
+      .buy {
+        border: 1px solid #d6ba8355;
+        border-radius: 5px;
+        padding: 10px 13px;
+        background: #ddbf88;
+        color: #112531;
+        font-weight: bold;
+        font-size: 11px;
+        min-width: 83px;
+      }
+      .buy:disabled {
+        background: #ffffff06;
+        color: #778f98;
+        border-color: #ffffff10;
+      }
+      .upcard.owned {
+        border-color: #81d9bd44;
+      }
+      .upcard.owned .buy {
+        color: var(--mint);
+      }
+      .upcard.locked {
+        opacity: 0.4;
+      }
+      .intro {
+        background: linear-gradient(90deg, #06141adb 0%, #08162344 70%, #08162300);
+        backdrop-filter: none;
+        justify-content: flex-start;
+        padding-left: 10vw;
+      }
+      .intro .panel {
+        width: 475px;
+        border: 0;
+        background: none;
+        box-shadow: none;
+        padding: 0;
+        overflow: visible;
+      }
+      .intro h2 {
+        font:
+          64px/0.98 Georgia,
+          serif;
+        letter-spacing: -2px;
+        margin: 20px 0 24px;
+      }
+      .intro h2 span {
+        color: var(--gold);
+      }
+      .intro .desc {
+        max-width: 330px;
+        font-size: 14px;
+      }
+      .startbtn {
+        border: 1px solid #e7c78f;
+        background: linear-gradient(110deg, #e9c68b, #cba971);
+        color: #17242d;
+        border-radius: 7px;
+        padding: 16px 28px;
+        font-size: 13px;
+        font-weight: bold;
+        margin-top: 22px;
+        box-shadow: 0 5px 30px #dfb2651c;
+      }
+      .startbtn:hover {
+        filter: brightness(1.1);
+      }
+      .intro .tips {
+        display: flex;
+        gap: 22px;
+        margin-top: 35px;
+        font-size: 10px;
+        color: #b5c9cc;
+      }
+      .intro .tips b {
+        display: block;
+        font:
+          24px Georgia,
+          serif;
+        color: var(--gold);
+        margin-bottom: 8px;
+      }
+      .intro small {
+        display: block;
+        margin-top: 18px;
+        color: #7f9ba5;
+        font-size: 10px;
+        letter-spacing: 1px;
+      }
+      .helpgrid {
+        display: grid;
+        gap: 18px;
+        margin: 27px 0;
+      }
+      .helpgrid div {
+        font-size: 12px;
+        line-height: 1.6;
+        color: #a9c2c7;
+      }
+      .helpgrid b {
+        display: block;
+        color: var(--gold);
+        font-size: 13px;
+      }
+      .secondary {
+        border: 1px solid var(--line);
+        border-radius: 5px;
+        background: #ffffff07;
+        padding: 12px 18px;
+        font-size: 12px;
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-top: 25px;
+      }
+      .stat {
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+      }
+      .stat b {
+        font:
+          27px Georgia,
+          serif;
+        color: var(--gold);
+        display: block;
+        margin-bottom: 8px;
+      }
+      .stat small {
+        font-size: 10px;
+        color: var(--muted);
+      }
+      #pauseMark {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: var(--glass);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 30px 40px;
+        text-align: center;
+        pointer-events: auto;
+      }
+      #pauseMark b {
+        font:
+          30px Georgia,
+          serif;
+        display: block;
+        margin-bottom: 14px;
+      }
+      #pauseMark[hidden] {
+        display: none;
+      }
+      #buildStatus {
+        position: absolute;
+        right: 30px;
+        top: 110px;
+        color: var(--gold);
+        background: var(--glass);
+        border: 1px solid var(--line);
+        padding: 12px 18px;
+        border-radius: 8px;
+        font-size: 11px;
+      }
+      #buildStatus[hidden] {
+        display: none;
+      }
+      .shiptag {
+        color: var(--muted);
+      }
+      @media (max-width: 1000px) {
+        .sector {
+          display: none;
+        }
+        .shiphud {
+          width: 255px;
+        }
+        .minimap {
+          width: 145px;
+          padding: 10px;
+        }
+        #map {
+          width: 123px;
+          height: 76px;
+        }
+        .upgradebtn {
+          padding: 15px;
+        }
+        .upgradebtn strong {
+          font-size: 16px;
+        }
+        .quest {
+          width: 285px;
+        }
+        .brand h1 {
+          font-size: 20px;
+        }
+      }
+      @media (max-width: 650px) {
+        .top {
+          padding: 14px 16px;
+          gap: 10px;
+        }
+        .brand {
+          gap: 4px;
+        }
+        .emblem {
+          font-size: 24px;
+          width: 27px;
+        }
+        .brand h1 {
+          font-size: 17px;
+        }
+        .brand .eyebrow {
+          font-size: 6px;
+          letter-spacing: 1px;
+        }
+        .coin {
+          min-width: 80px;
+          padding: 7px 10px;
+          gap: 7px;
+        }
+        .coin b {
+          font-size: 17px;
+        }
+        .coin i {
+          font-size: 18px;
+        }
+        .coin small {
+          font-size: 6px;
+        }
+        .right {
+          gap: 5px;
+        }
+        .iconbtn {
+          height: 33px;
+          width: 33px;
+          font-size: 15px;
+        }
+        #soundBtn,
+        #fullBtn {
+          display: none;
+        }
+        .quest {
+          left: 16px;
+          top: 79px;
+          width: 250px;
+          padding: 14px 16px;
+        }
+        .quest h2 {
+          font-size: 20px;
+          margin: 9px 0;
+        }
+        .quest p {
+          font-size: 11px;
+          min-height: 0;
+          margin-bottom: 7px;
+          line-height: 1.5;
+        }
+        .questline {
+          margin-top: 9px;
+        }
+        .reward {
+          margin-top: 8px;
+        }
+        .questtop {
+          font-size: 8px;
+        }
+        .qaction {
+          padding: 9px;
+          margin-top: 10px;
+        }
+        .bottom {
+          left: 16px;
+          bottom: 18px;
+        }
+        .upgradebtn {
+          padding: 13px;
+        }
+        .upgradebtn .symbol {
+          font-size: 21px;
+        }
+        .upgradebtn small,
+        .key {
+          display: none;
+        }
+        .upgradebtn strong {
+          font-size: 14px;
+        }
+        .controls {
+          display: none;
+        }
+        .shiphud {
+          left: auto;
+          right: 16px;
+          transform: none;
+          width: 185px;
+          bottom: 18px;
+        }
+        .cargo {
+          padding: 11px 12px;
+        }
+        .cargohead {
+          font-size: 8px;
+          margin-bottom: 7px;
+        }
+        .manifest {
+          font-size: 8px;
+          gap: 4px;
+        }
+        .activity {
+          font-size: 9px;
+          margin-bottom: 8px;
+        }
+        .minimap {
+          bottom: 130px;
+          right: 16px;
+          width: 112px;
+          padding: 8px;
+        }
+        #map {
+          width: 94px;
+          height: 56px;
+        }
+        .maptitle {
+          font-size: 6px;
+          letter-spacing: 1px;
+        }
+        .mapfoot {
+          display: none;
+        }
+        .toast {
+          top: 320px;
+          width: 86%;
+          font-size: 10px;
+          padding: 10px;
+        }
+        .toast strong {
+          font-size: 16px;
+        }
+        .intro {
+          padding: 30px;
+          align-items: center;
+          background: #071621ad;
+        }
+        .intro h2 {
+          font-size: 52px;
+        }
+        .intro .desc {
+          font-size: 13px;
+        }
+        .intro .tips {
+          gap: 17px;
+        }
+        .panel {
+          padding: 25px 18px;
+        }
+        .panel h2 {
+          font-size: 28px;
+        }
+        .upcard {
+          padding: 11px;
+          grid-template-columns: 26px 1fr auto;
+          gap: 8px;
+        }
+        .upcard h3 {
+          font-size: 15px;
+        }
+        .upcard p {
+          font-size: 9px;
+        }
+        .buy {
+          padding: 9px;
+          min-width: 65px;
+        }
+        .upicon {
+          font-size: 21px;
+        }
+        .upgrid {
+          gap: 7px;
+          margin-top: 16px;
+        }
+        #buildStatus {
+          right: 16px;
+          top: auto;
+          bottom: 240px;
+          font-size: 9px;
+          padding: 10px;
+        }
+        .modal {
+          padding: 14px;
+        }
+      }
+      @media (max-height: 650px) and (min-width: 651px) {
+        .top {
+          padding-top: 12px;
+        }
+        .quest {
+          top: 78px;
+          padding: 15px;
+          width: 270px;
+        }
+        .quest h2 {
+          font-size: 20px;
+        }
+        .quest p {
+          min-height: 0;
+        }
+        .bottom,
+        .shiphud,
+        .minimap {
+          bottom: 14px;
+        }
+        .controls {
+          display: none;
+        }
+        .intro h2 {
+          font-size: 44px;
+        }
+        .intro .tips {
+          margin-top: 18px;
+        }
+        .intro .desc {
+          font-size: 12px;
+        }
+        .intro .startbtn {
+          margin-top: 12px;
+        }
+      }
+      @media (max-width: 650px) {
+        .upgradebtn {
+          width: 145px;
+          gap: 8px;
+          padding: 13px 10px;
+        }
+        .upgradebtn strong {
+          font-size: 0;
+        }
+        .upgradebtn strong:after {
+          content: "Workshop";
+          font-size: 14px;
+        }
+      }
+      @media (max-width: 370px) {
+        .shiphud {
+          width: 165px;
+        }
+        .upgradebtn {
+          width: 125px;
+        }
+        .upgradebtn strong:after {
+          font-size: 12px;
+        }
+        .top {
+          padding-left: 10px;
+          padding-right: 10px;
+        }
+        .brand h1 {
+          font-size: 15px;
+        }
+        .bottom {
+          left: 10px;
+        }
+        .shiphud {
+          right: 10px;
+        }
+      }
+
+      .shop-tabs {
+        display: flex;
+        gap: 8px;
+        margin: 24px 0 8px;
+        position: sticky;
+        top: -32px;
+        background: #102530;
+        padding: 10px 0;
+        z-index: 2;
+      }
+      .shop-tab {
+        flex: 1;
+        border: 1px solid var(--line);
+        background: #ffffff05;
+        border-radius: 7px;
+        padding: 12px 8px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .shop-tab.selected {
+        background: #e9c88c19;
+        color: var(--gold);
+        border-color: #e9c88c77;
+      }
+      .level {
+        font-size: 9px;
+        color: var(--mint);
+        margin: 5px 0;
+        letter-spacing: 1px;
+      }
+      .requirement {
+        color: var(--gold) !important;
+      }
+      .fleet-heading {
+        margin-top: 16px;
+        font-size: 10px;
+        letter-spacing: 1px;
+        color: var(--gold);
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .fleet-heading span {
+        font-size: 9px;
+        color: var(--muted);
+        letter-spacing: 0;
+      }
+      .fleet-note {
+        font-size: 11px;
+        color: var(--muted);
+        line-height: 1.6;
+        margin: 0;
+      }
+      .worker-row {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .worker-row strong {
+        font:
+          17px Georgia,
+          serif;
+      }
+      .worker-row small {
+        display: block;
+        font-size: 9px;
+        color: var(--muted);
+        margin-top: 6px;
+      }
+      .worker-row label {
+        font-size: 9px;
+        color: var(--gold);
+        max-width: 50%;
+      }
+      .worker-row select {
+        display: block;
+        width: 100%;
+        margin-top: 6px;
+        border: 1px solid var(--line);
+        border-radius: 5px;
+        background: #102530;
+        color: #eee6cc;
+        padding: 9px 4px;
+        font-size: 11px;
+      }
+      .upgrid {
+        margin-top: 12px;
+      }
+      #shop .panel {
+        max-width: 680px;
+        width: 680px;
+      }
+      .buy:disabled {
+        opacity: 0.5;
+      }
+      @media (max-width: 650px) {
+        .shop-tabs {
+          top: -25px;
+          margin-top: 14px;
+        }
+        .shop-tab {
+          padding: 10px 6px;
+          font-size: 11px;
+        }
+        .worker-row {
+          padding: 10px;
+          align-items: flex-start;
+        }
+        .worker-row label {
+          max-width: 48%;
+        }
+        .worker-row select {
+          font-size: 10px;
+        }
+        .fleet-heading {
+          font-size: 9px;
+        }
+        .manifest {
+          font-size: 7px;
+          gap: 3px;
+        }
+        .level {
+          font-size: 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="world" aria-label="Space voyage map. Click to set your course."></canvas>
+    <div id="shade"></div>
+    <div class="hud" id="hud">
+      <header class="top">
+        <div class="brand">
+          <div class="emblem">✧</div>
+          <div>
+            <h1>Ether Sails</h1>
+            <div class="eyebrow">A voyage beyond the ordinary</div>
+          </div>
+        </div>
+        <div class="sector">
+          <div class="eyebrow" id="sectorNum">SECTOR I</div>
+          <strong id="sectorName">Aurora Archipelago</strong>
+        </div>
+        <div class="right">
+          <div class="coin">
+            <i>◉</i>
+            <div><b id="money">0</b><small>COINS</small></div>
+          </div>
+          <button class="iconbtn" id="soundBtn" title="Sound" aria-label="Toggle sound">♪</button
+          ><button class="iconbtn" id="helpBtn" title="Game menu" aria-label="Game menu">☰</button
+          ><button class="iconbtn" id="pauseBtn" title="Pause — Space" aria-label="Pause">Ⅱ</button
+          ><button class="iconbtn" id="fullBtn" title="Fullscreen" aria-label="Fullscreen">
+            ⛶
+          </button>
+        </div>
+      </header>
+      <section class="quest" aria-live="polite">
+        <div class="questtop"><span>✧ SHIP’S LOG</span><span id="qNum">01 / 15</span></div>
+        <h2 id="qTitle"></h2>
+        <p id="qHint"></p>
+        <div class="questline"><span id="qLabel">PROGRESS</span><b id="qProgress"></b></div>
+        <div class="bar"><div id="qBar"></div></div>
+        <div class="reward">
+          <span id="qRewardLabel">Quest reward</span><span id="qReward"></span>
+        </div>
+        <button class="qaction" id="qAction" hidden></button>
+      </section>
+      <div id="buildStatus" hidden></div>
+      <div class="toast" id="toast"></div>
+      <div class="controls">
+        <b>LEFT / RIGHT CLICK</b> set course &nbsp; · &nbsp; <b>WASD</b> steer manually
+      </div>
+      <div class="bottom">
+        <button class="upgradebtn" id="upgradeBtn">
+          <span class="symbol">⚒</span><span><strong>Ship Workshop</strong></span
+          ><span class="key">U</span>
+        </button>
+      </div>
+      <div class="shiphud">
+        <div class="activity" id="activity"></div>
+        <div class="cargo">
+          <div class="cargohead"><span>SWALLOW’S HOLD</span><b id="load">0 / 8</b></div>
+          <div class="bar"><div id="cargoBar"></div></div>
+          <div class="manifest">
+            <span style="color: #edbc6e">◆ <span id="bagAmber">0</span></span
+            ><span style="color: #80e2d1">◆ <span id="bagAzure">0</span></span
+            ><span style="color: #d6a0ef">◆ <span id="bagAether">0</span></span
+            ><span style="color: #ffd887">◆ <span id="bagNova">0</span></span
+            ><em id="bagValue">0 ◉</em>
+          </div>
+        </div>
+      </div>
+      <div class="minimap">
+        <div class="maptitle"><span>STAR ATLAS</span><span id="clock">00:00</span></div>
+        <canvas
+          id="map"
+          width="340"
+          height="188"
+          aria-label="Mini-map: click to set course"
+        ></canvas>
+        <div class="mapfoot">CLICK TO SET COURSE</div>
+      </div>
+      <div id="pauseMark" hidden>
+        <b>Becalmed</b><button class="secondary" id="resumeBtn">Resume Voyage</button>
+      </div>
+    </div>
+    <div class="modal intro" id="intro">
+      <div class="panel">
+        <div class="eyebrow">A SPACEFARING ADVENTURE</div>
+        <h2>Chase the wind.<br />Find your <span>stars.</span></h2>
+        <p class="desc">
+          From a little caravel to a trade route of your own. Raise your sails — the nebula awaits.
+        </p>
+        <div class="tips">
+          <div><b>01</b>Sail to a planet</div>
+          <div><b>02</b>Gather your cargo</div>
+          <div><b>03</b>Trade and grow</div>
+        </div>
+        <button class="startbtn" id="startBtn">Set Sail &nbsp; →</button
+        ><small>4 WORLDS &nbsp; / &nbsp; BUILD YOUR FLEET &nbsp; / &nbsp; NO RUSH</small>
+      </div>
+    </div>
+    <div class="modal" id="shop" hidden>
+      <div class="panel">
+        <button class="iconbtn close" id="closeShop" aria-label="Close">×</button>
+        <div class="eyebrow">ONBOARD WORKSHOP</div>
+        <h2>Build Your Voyage</h2>
+        <div class="desc">
+          Choose any upgrade, hire workers, or open new routes. No quest locks.<br />Your voyage
+          continues while this shop is open. <b id="shopMoney" style="color: var(--gold)"></b>
+        </div>
+        <div class="shop-tabs" id="shopTabs" role="tablist" aria-label="Workshop categories"></div>
+        <div class="upgrid" id="upgrades"></div>
+      </div>
+    </div>
+    <div class="modal" id="help" hidden>
+      <div class="panel">
+        <button class="iconbtn close" id="closeHelp" aria-label="Close">×</button>
+        <div class="eyebrow">GAME MENU</div>
+        <h2>Captain’s Menu</h2>
+        <div class="helpgrid">
+          <div>
+            <b>Left click, right click, or tap → sail</b>Click a planet or open space. WASD / arrow
+            keys steer manually. You can also set a course on the mini-map.
+          </div>
+          <div>
+            <b>Stopped over a planet → automatic harvesting</b>Moving ships cannot gather. Click a
+            planet to stop at its center, or release WASD. Resources never run out.
+          </div>
+          <div>
+            <b>Over a harbor → automatic selling</b>Amber: 1 ◉ · crystals: 3 ◉ · aether: 10 ◉ ·
+            sunstone: 25 ◉. Dock Cranes improve unloading for the entire fleet.
+          </div>
+          <div>
+            <b>U → workshop, anywhere</b>Buy in any order. Ship upgrades have multiple levels; Crew
+            lets you hire and route up to 12 workers; Routes opens new worlds. Space pauses; Esc
+            opens the menu or closes the current panel.
+          </div>
+          <div>
+            <b>Build your crew → unlock new territory</b>Start with 8 cargo slots. Each hold level
+            multiplies the current capacity by 1.5, rounded down. Workers always hold half your
+            current capacity, rounded down. Assign a planet manually, or use Auto to pick a random
+            open planet after each delivery.
+          </div>
+        </div>
+        <p class="desc">
+          Progress is saved in this browser when local storage is available. Menus do not pause the
+          voyage. Time stops when the tab is hidden. No ads, game over, or countdown to failure.
+        </p>
+        <button class="secondary" id="resetBtn">Reset Game</button>
+        <div id="resetConfirm" hidden style="margin-top: 12px; color: var(--gold); font-size: 12px">
+          Reset coins, cargo, upgrades, workers, quests and voyage time? This cannot be undone.
+          <button class="secondary" id="confirmReset">Yes, Reset Everything</button>
+          <button class="secondary" id="cancelReset">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="ending" hidden>
+      <div class="panel">
+        <div class="eyebrow">VOYAGE COMPLETE · 15 / 15</div>
+        <h2>Every star now<br />has a way home.</h2>
+        <p class="desc">
+          You built a trading fleet across four resource worlds, choosing your own upgrades and
+          worker routes. Ahead lie solar currents, caravans, and forgotten shipyards.
+        </p>
+        <div class="stats" id="endStats"></div>
+        <button class="startbtn" id="continueBtn">Continue Free Sailing →</button>
+        <p class="desc">Captain’s bonus: +200 ◉. Start a new voyage from the ☰ menu.</p>
+      </div>
+    </div>
+    <script>
+      /* ASSETS: editable image paths relative to this HTML. Keep the assets folder alongside it.
+   All artwork is pre-rendered raster imagery, not generated by gameplay code.
+   Resource planets, harbours, player and helper are separate scene objects. */
+      const ASSETS = {
+  space: "assets/webp/space.webp",
+  ship: "assets/webp/ship.webp",
+  port: "assets/webp/port.webp",
+  amber: "assets/webp/amber.webp",
+  azure: "assets/webp/azure.webp",
+  aether: "assets/webp/aether.webp",
+  nova: "assets/webp/nova.webp"
+};
+      // ETHER SAILS v1 — free workshop, four resources, independently routed workers.
+const CFG = {
+  width: 2400,
+  height: 1400,
+  speed: 155,
+  hold: 8,
+  sellRate: 12,
+  maxWorkers: 12,
+  firstPlanetCost: 80,
+  planetCostRatio: 5,
+};
+const NODES = [
+  {
+    id: "home",
+    x: 440,
+    y: 800,
+    r: 90,
+    size: 240,
+    name: "Aurora Harbor",
+    sub: "TRADING HARBOR",
+    asset: "port",
+    color: "#eaca8d",
+    type: "port",
+  },
+  {
+    id: "amber",
+    x: 510,
+    y: 410,
+    r: 80,
+    size: 196,
+    name: "Amber Coast",
+    sub: "AMBER",
+    asset: "amber",
+    color: "#edbc6e",
+    price: 1,
+    rate: 1,
+    type: "resource",
+  },
+  {
+    id: "azure",
+    x: 1050,
+    y: 760,
+    r: 85,
+    size: 215,
+    name: "Azure",
+    sub: "CRYSTALS",
+    asset: "azure",
+    color: "#80e2d1",
+    price: 3,
+    rate: 0.8,
+    type: "resource",
+    unlock: "azure",
+  },
+  {
+    id: "aether",
+    x: 1840,
+    y: 400,
+    r: 90,
+    size: 250,
+    name: "Violet Reach",
+    sub: "AETHER",
+    asset: "aether",
+    color: "#d6a0ef",
+    price: 10,
+    rate: 0.6,
+    type: "resource",
+    unlock: "gate",
+  },
+  {
+    id: "nova",
+    x: 2140,
+    y: 1090,
+    r: 90,
+    size: 225,
+    name: "Sunstone Crown",
+    sub: "SUNSTONE",
+    asset: "nova",
+    color: "#ffd887",
+    price: 25,
+    rate: 0.4,
+    type: "resource",
+    unlock: "nova",
+  },
+  {
+    id: "remote",
+    x: 1670,
+    y: 1000,
+    r: 85,
+    size: 205,
+    name: "Horizon Harbor",
+    sub: "TRADING HARBOR",
+    asset: "port",
+    color: "#d6a0ef",
+    type: "port",
+    unlock: "remote",
+  },
+];
+const RESOURCES = NODES.filter((n) => n.type === "resource");
+const UPGRADES = [
+  {
+    id: "hold",
+    name: "Cargo Hold",
+    group: "ship",
+    tag: "SHARED CAPACITY",
+    base: 12,
+    factor: 1.8,
+    max: 8,
+    icon: "▤",
+  },
+  {
+    id: "drill",
+    name: "Beam Harvester",
+    group: "ship",
+    tag: "PLAYER HARVEST SPEED",
+    base: 16,
+    factor: 1.85,
+    max: 8,
+    icon: "◇",
+  },
+  {
+    id: "sails",
+    name: "Solar Sails",
+    group: "ship",
+    tag: "PLAYER SAILING SPEED",
+    base: 14,
+    factor: 1.8,
+    max: 8,
+    icon: "➤",
+  },
+  {
+    id: "unload",
+    name: "Dock Cranes",
+    group: "ship",
+    tag: "ALL CARGO UNLOADING",
+    base: 10,
+    factor: 1.8,
+    max: 6,
+    icon: "⚓",
+  },
+  {
+    id: "worker",
+    name: "Hire a Worker",
+    group: "crew",
+    tag: "EXPAND YOUR FLEET",
+    base: 24,
+    factor: 1.65,
+    max: 12,
+    icon: "⚑",
+  },
+  {
+    id: "workerSpeed",
+    name: "Worker Sails",
+    group: "crew",
+    tag: "ALL WORKERS · SPEED",
+    base: 20,
+    factor: 1.85,
+    max: 8,
+    icon: "➤",
+  },
+  {
+    id: "workerDrill",
+    name: "Worker Harvesters",
+    group: "crew",
+    tag: "ALL WORKERS · HARVESTING",
+    base: 24,
+    factor: 1.85,
+    max: 8,
+    icon: "◇",
+  },
+  {
+    id: "azure",
+    name: "Azure Chart",
+    group: "routes",
+    tag: "PLANET II · 3 COINS / UNIT",
+    planetUnlock: true,
+    max: 1,
+    icon: "✧",
+  },
+  {
+    id: "gate",
+    name: "Nebula Passage",
+    group: "routes",
+    tag: "PLANET III · 10 COINS / UNIT",
+    planetUnlock: true,
+    max: 1,
+    requires: "azure",
+    timer: 8,
+    icon: "✧",
+  },
+  {
+    id: "nova",
+    name: "Sunstone Chart",
+    group: "routes",
+    tag: "PLANET IV · 25 COINS / UNIT",
+    planetUnlock: true,
+    max: 1,
+    requires: "gate",
+    timer: 8,
+    icon: "✧",
+  },
+  {
+    id: "remote",
+    name: "Horizon Harbor",
+    group: "routes",
+    tag: "A CLOSER TRADING BASE",
+    followsPlanets: true,
+    max: 1,
+    requires: "nova",
+    timer: 10,
+    icon: "⚓",
+  },
+];
+// Milestones guide exploration; no quest number appears in purchasing or access rules.
+const QUESTS = [
+  {
+    title: "Catch the Starwind",
+    hint: "Set course for Amber Coast.",
+    kind: "visit",
+    target: "amber",
+    goal: 1,
+    reward: 0,
+  },
+  {
+    title: "Stop and Gather",
+    hint: "Gather 8 amber at Amber Coast.",
+    kind: "collect",
+    target: "amber",
+    goal: 8,
+    reward: 4,
+  },
+  {
+    title: "Your First Trade",
+    hint: "Sell 8 amber at Aurora Harbor.",
+    kind: "sold",
+    target: "amber",
+    goal: 8,
+    reward: 0,
+  },
+  {
+    title: "A Bigger Hold",
+    hint: "Upgrade Cargo Hold to level 1.",
+    kind: "upgrade",
+    target: "hold",
+    goal: 1,
+    reward: 12,
+  },
+  {
+    title: "A Crystal Horizon",
+    hint: "Visit Azure. Buy Azure Chart in Workshop → Routes to unlock it.",
+    kind: "visit",
+    target: "azure",
+    goal: 1,
+    reward: 0,
+  },
+  {
+    title: "Crystal Trade",
+    hint: "Personally sell 16 crystals in total.",
+    kind: "sold",
+    target: "azure",
+    goal: 16,
+    reward: 20,
+  },
+  {
+    title: "Many Hands",
+    hint: "Let your workers earn 30 coins in total.",
+    kind: "fleet",
+    goal: 30,
+    reward: 20,
+  },
+  {
+    title: "A Growing Business",
+    hint: "Earn 400 trade coins in total.",
+    kind: "earned",
+    goal: 400,
+    reward: 30,
+  },
+  {
+    title: "Beyond the Passage",
+    hint: "Visit Violet Reach. Buy Nebula Passage in Workshop → Routes to unlock it.",
+    kind: "visit",
+    target: "aether",
+    goal: 1,
+    reward: 0,
+  },
+  {
+    title: "Aether Deliveries",
+    hint: "Personally sell 24 aether in total.",
+    kind: "sold",
+    target: "aether",
+    goal: 24,
+    reward: 40,
+  },
+  {
+    title: "An Independent Fleet",
+    hint: "Earn 2,200 trade coins in total.",
+    kind: "earned",
+    goal: 2200,
+    reward: 60,
+  },
+  {
+    title: "The Fourth World",
+    hint: "Visit Sunstone Crown. Buy Sunstone Chart in Workshop → Routes to unlock it.",
+    kind: "visit",
+    target: "nova",
+    goal: 1,
+    reward: 0,
+  },
+  {
+    title: "Golden Cargo",
+    hint: "Personally sell 16 sunstone in total.",
+    kind: "sold",
+    target: "nova",
+    goal: 16,
+    reward: 80,
+  },
+  {
+    title: "The Crew Delivers",
+    hint: "Let your workers earn 1,500 coins in total.",
+    kind: "fleet",
+    goal: 1500,
+    reward: 100,
+  },
+  {
+    title: "Your Trading Empire",
+    hint: "Earn 8,000 trade coins in total.",
+    kind: "earned",
+    goal: 8000,
+    reward: 200,
+  },
+];
+class Game {
+  constructor() {
+    this.version = 1;
+    this.time = 0;
+    this.q = 0;
+    this.money = 0;
+    this.earned = 0;
+    this.spent = 0;
+    this.bonus = 0;
+    this.p = { x: 440, y: 640, a: 0 };
+    this.dest = null;
+    this.moving = false;
+    this.manual = false;
+    this.bag = Object.fromEntries(RESOURCES.map((n) => [n.id, 0]));
+    this.collected = { ...this.bag };
+    this.sold = { ...this.bag };
+    this.visited = {};
+    this.up = {};
+    this.build = null;
+    this.workers = [];
+    this.droneEarned = 0;
+    this.gather = 0;
+    this.sell = 0;
+    this.lastNode = null;
+    this.activity = "No course set";
+    this.events = [];
+    this.log = [];
+    this.finished = false;
+    this.finishTime = 0;
+  }
+  level(id) {
+    return id === "worker" ? this.workers.length : this.up[id] || 0;
+  }
+  capacityAt(level) {
+    let cap = CFG.hold;
+    for (let i = 0; i < level; i++) cap = Math.floor(cap * 1.5);
+    return cap;
+  }
+  get capacity() {
+    return this.capacityAt(this.level("hold"));
+  }
+  get workerCapacity() {
+    return Math.floor(this.capacity / 2);
+  }
+  get speed() {
+    return CFG.speed * 1.15 ** this.level("sails");
+  }
+  get harvestMultiplier() {
+    return 1.25 ** this.level("drill");
+  }
+  get sellRate() {
+    return CFG.sellRate * 1.35 ** this.level("unload");
+  }
+  get workerSpeed() {
+    return 140 * 1.2 ** this.level("workerSpeed");
+  }
+  get workerMultiplier() {
+    return 0.8 * 1.3 ** this.level("workerDrill");
+  }
+  get load() {
+    return Object.values(this.bag).reduce((a, b) => a + b, 0);
+  }
+  get cargoValue() {
+    return RESOURCES.reduce((sum, n) => sum + this.bag[n.id] * n.price, 0);
+  }
+  node(id) {
+    return NODES.find((n) => n.id === id);
+  }
+  available(n) {
+    return !!n && (!n.unlock || !!this.up[n.unlock]);
+  }
+  cost(id) {
+    const u = UPGRADES.find((u) => u.id === id);
+    if (!u) return Infinity;
+    // Paid planets form the sequence; the new harbor is the next step after the last planet.
+    if (u.planetUnlock || u.followsPlanets) {
+      const planets = RESOURCES.filter((n) => n.unlock);
+      const index = u.followsPlanets ? planets.length : planets.findIndex((n) => n.unlock === id);
+      return index < 0 ? Infinity : Math.ceil(CFG.firstPlanetCost * CFG.planetCostRatio ** index);
+    }
+    return Math.ceil(u.base * (u.factor || 1) ** this.level(id));
+  }
+  reason(id) {
+    const u = UPGRADES.find((u) => u.id === id);
+    if (!u) return "Unknown";
+    if (this.level(id) >= u.max) return "Max level";
+    if (u.requires && !this.up[u.requires])
+      return "Requires " + UPGRADES.find((x) => x.id === u.requires).name;
+    if (u.timer && this.build) return "Construction busy";
+    if (this.money < this.cost(id)) return "Not enough coins";
+    return "";
+  }
+  buy(id) {
+    const u = UPGRADES.find((u) => u.id === id);
+    if (!u || this.reason(id)) return false;
+    const cost = this.cost(id);
+    this.money -= cost;
+    this.spent += cost;
+    if (id === "worker") {
+      const d = {
+        id: this.workers.length + 1,
+        x: 440,
+        y: 800,
+        a: 0,
+        route: "auto",
+        resource: "amber",
+        target: "amber",
+        phase: "gather",
+        load: 0,
+        tick: 0,
+        earned: 0,
+      };
+      this.workers.push(d);
+      this.depart(d);
+    } else if (u.timer) this.build = { id, left: u.timer, total: u.timer };
+    else this.up[id] = this.level(id) + 1;
+    this.emit("buy", u.name + (u.max > 1 && id !== "worker" ? " · level " + this.level(id) : ""));
+    this.check();
+    return true;
+  }
+  nearestPort(p) {
+    return NODES.filter((n) => n.type === "port" && this.available(n)).sort(
+      (a, b) => Math.hypot(a.x - p.x, a.y - p.y) - Math.hypot(b.x - p.x, b.y - p.y),
+    )[0];
+  }
+  bestResource(worker = false) {
+    const cap = worker ? this.workerCapacity : this.capacity,
+      speed = worker ? this.workerSpeed : this.speed,
+      mul = worker ? this.workerMultiplier : this.harvestMultiplier;
+    return RESOURCES.filter((n) => this.available(n)).sort((a, b) => {
+      const score = (n) => {
+        const port = this.nearestPort(n);
+        return (
+          (cap * n.price) /
+          (cap / (n.rate * mul) +
+            (2 * Math.hypot(n.x - port.x, n.y - port.y)) / speed +
+            cap / this.sellRate)
+        );
+      };
+      return score(b) - score(a);
+    })[0];
+  }
+  depart(d) {
+    const open = RESOURCES.filter((n) => this.available(n));
+    const n =
+      d.route === "auto" ? open[Math.floor(Math.random() * open.length)] : this.node(d.route);
+    d.resource = this.available(n) ? n.id : "amber";
+    d.target = d.resource;
+    d.phase = "gather";
+    d.tick = 0;
+  }
+  assignWorker(id, route) {
+    const d = this.workers.find((d) => d.id === id);
+    if (!d || (route !== "auto" && !RESOURCES.some((n) => n.id === route && this.available(n))))
+      return false;
+    d.route = route;
+    if (d.load === 0) this.depart(d);
+    return true;
+  }
+  move(x, y) {
+    this.dest = {
+      x: Math.max(100, Math.min(this.up.gate ? 2300 : 1330, x)),
+      y: Math.max(180, Math.min(1250, y)),
+    };
+  }
+  travel(p, t, s, dt) {
+    const dx = t.x - p.x,
+      dy = t.y - p.y,
+      d = Math.hypot(dx, dy);
+    if (d < 0.001) return true;
+    const step = Math.min(d, s * dt);
+    p.x += (dx / d) * step;
+    p.y += (dy / d) * step;
+    p.a = Math.atan2(dy, dx) + Math.PI / 2;
+    return step >= d;
+  }
+  emit(type, text, x = this.p.x, y = this.p.y) {
+    this.events.push({ type, text, x, y });
+  }
+  progress() {
+    const q = QUESTS[this.q];
+    if (!q) return 1;
+    switch (q.kind) {
+      case "upgrade":
+        return this.level(q.target);
+      case "visit":
+        return +!!this.visited[q.target];
+      case "collect":
+        return this.collected[q.target];
+      case "sold":
+        return this.sold[q.target];
+      case "earned":
+        return this.earned;
+      case "fleet":
+        return this.droneEarned;
+    }
+    return 0;
+  }
+  check() {
+    while (this.q < QUESTS.length && this.progress() >= QUESTS[this.q].goal) {
+      const q = QUESTS[this.q];
+      this.money += q.reward;
+      this.bonus += q.reward;
+      this.log.push({
+        quest: this.q + 1,
+        time: +this.time.toFixed(2),
+        money: this.money,
+        earned: this.earned,
+        spent: this.spent,
+        drone: this.droneEarned,
+      });
+      this.q++;
+      this.emit("quest", q.title + (q.reward ? "  +" + q.reward + " ◉" : ""));
+      if (this.q === QUESTS.length) {
+        this.finished = true;
+        this.finishTime = this.time;
+        this.emit("finish", "Your trading empire is open!");
+      }
+    }
+  }
+  update(dt, steer = null) {
+    this.time += dt;
+    const manual = !!(steer && (steer.x || steer.y));
+    if (manual) {
+      const d = Math.hypot(steer.x, steer.y);
+      this.move(this.p.x + (steer.x / d) * 50, this.p.y + (steer.y / d) * 50);
+    } else if (this.manual) this.dest = null;
+    this.manual = manual;
+    const ox = this.p.x,
+      oy = this.p.y;
+    if (this.dest && this.travel(this.p, this.dest, this.speed, dt)) this.dest = null;
+    this.moving = Math.hypot(this.p.x - ox, this.p.y - oy) > 0.000001;
+    if (this.build) {
+      this.build.left -= dt;
+      if (this.build.left <= 0) {
+        this.up[this.build.id] = 1;
+        this.emit("unlock", UPGRADES.find((u) => u.id === this.build.id).name + " is ready");
+        this.build = null;
+      }
+    }
+    const n = NODES.find(
+      (n) => this.available(n) && Math.hypot(n.x - this.p.x, n.y - this.p.y) < n.r,
+    );
+    this.activity = this.dest ? "Under full sail" : "Choose your course";
+    if (n?.type === "resource") this.visited[n.id] = true;
+    if (n?.type === "resource") {
+      if (this.lastNode !== n.id) this.gather = 0;
+      if (this.moving) {
+        this.gather = 0;
+        this.activity = "Under full sail · stop to harvest";
+      } else if (this.load >= this.capacity) {
+        this.gather = 0;
+        this.activity = "Hold full · head to a harbor";
+      } else {
+        this.activity = "Harvesting: " + n.sub.toLowerCase();
+        this.gather += dt * n.rate * this.harvestMultiplier;
+        while (this.gather >= 1 && this.load < this.capacity) {
+          this.gather--;
+          this.bag[n.id]++;
+          this.collected[n.id]++;
+          this.emit("collect", "+1", n.x, n.y);
+          if (this.load === this.capacity) this.emit("full", "Hold full. Set course for a harbor!");
+        }
+      }
+    } else this.gather = 0;
+    if (n?.type === "port" && this.load) {
+      this.activity = "Selling cargo";
+      this.sell += dt * this.sellRate;
+      while (this.sell >= 1 && this.load) {
+        this.sell--;
+        const id = RESOURCES.find((r) => this.bag[r.id] > 0).id;
+        this.bag[id]--;
+        this.sold[id]++;
+        const coins = this.node(id).price;
+        this.money += coins;
+        this.earned += coins;
+        this.emit("sell", "+" + coins, n.x, n.y);
+      }
+    } else this.sell = 0;
+    this.lastNode = n?.id;
+    for (const d of this.workers) this.updateWorker(d, dt);
+    this.check();
+  }
+  updateWorker(d, dt) {
+    const t = this.node(d.target),
+      ox = d.x,
+      oy = d.y;
+    if (!this.travel(d, t, this.workerSpeed, dt)) return;
+    if (Math.hypot(d.x - ox, d.y - oy) > 0.000001) return;
+    if (d.phase === "gather") {
+      d.tick += dt * this.node(d.resource).rate * this.workerMultiplier;
+      while (d.tick >= 1 && d.load < this.workerCapacity) {
+        d.tick--;
+        d.load++;
+      }
+      if (d.load >= this.workerCapacity) {
+        d.target = this.nearestPort(d).id;
+        d.phase = "sell";
+        d.tick = 0;
+      }
+    } else {
+      d.tick += dt * this.sellRate;
+      while (d.tick >= 1 && d.load) {
+        d.tick--;
+        d.load--;
+        const coins = this.node(d.resource).price;
+        this.money += coins;
+        this.earned += coins;
+        this.droneEarned += coins;
+        d.earned += coins;
+        this.emit("drone", "+" + coins + " · W" + d.id, t.x, t.y);
+      }
+      if (!d.load) this.depart(d);
+    }
+  }
+  save() {
+    const o = { ...this };
+    delete o.events;
+    return JSON.stringify(o);
+  }
+  static restore(s) {
+    const g = new Game();
+    try {
+      const o = JSON.parse(s);
+      if (
+        o &&
+        (o.version === 1 || o.version === 3) &&
+        Number.isInteger(o.q) &&
+        o.q >= 0 &&
+        o.q <= QUESTS.length &&
+        o.p &&
+        Array.isArray(o.workers)
+      )
+        Object.assign(g, o);
+    } catch (e) {}
+    // Preserve existing progress while writing all future saves as version 1.
+    g.version = 1;
+    g.events = [];
+    g.manual = false;
+    g.activity = g.dest ? "Under full sail" : "Choose your course";
+    return g;
+  }
+}
+if (typeof module !== "undefined")
+  module.exports = { Game, CFG, NODES, RESOURCES, UPGRADES, QUESTS };
+;
+      const $ = (id) => document.getElementById(id),
+  canvas = $("world"),
+  ctx = canvas.getContext("2d"),
+  mc = $("map").getContext("2d");
+// Permanent save key requested by the user. Do not version or rename it.
+const STORE = "ether-sails";
+let stored = null;
+try {
+  stored = localStorage.getItem(STORE);
+  if (stored === null) {
+    const legacy = localStorage.getItem("ether-sails-v3");
+    if (legacy && JSON.parse(legacy)?.version === 3) {
+      stored = legacy;
+      localStorage.setItem(STORE, legacy);
+    }
+  }
+} catch (e) {}
+let game = stored ? Game.restore(stored) : new Game();
+window.game = game;
+let started = false,
+  paused = false,
+  modal = null,
+  hidden = false,
+  sound = true,
+  audio = null,
+  W = 0,
+  H = 0,
+  DPR = 1,
+  zoom = 1,
+  cam = { x: 700, y: 640 },
+  last = 0,
+  uiTick = 0,
+  saveTick = 0,
+  toastTimer = 0,
+  particles = [],
+  clickFx = null,
+  keys = {},
+  pointerHeld = false,
+  lastPing = 0;
+const images = {};
+let loaded = 0;
+for (const [key, src] of Object.entries(ASSETS)) {
+  let im = new Image();
+  im.onload = () => loaded++;
+  im.src = src;
+  images[key] = im;
+}
+function clamp(v, a, b) {
+  return Math.max(a, Math.min(b, v));
+}
+function timeText(t) {
+  return (
+    Math.floor(t / 60)
+      .toString()
+      .padStart(2, "0") +
+    ":" +
+    Math.floor(t % 60)
+      .toString()
+      .padStart(2, "0")
+  );
+}
+function resize() {
+  W = innerWidth;
+  H = innerHeight;
+  DPR = Math.min(devicePixelRatio || 1, 2);
+  canvas.width = W * DPR;
+  canvas.height = H * DPR;
+  zoom = W < 650 ? 0.65 : Math.min(W / 1440, H / 900) * 1.05;
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  cam.x = clamp(game.p.x, W / zoom / 2, CFG.width - W / zoom / 2);
+  cam.y = clamp(game.p.y, H / zoom / 2, CFG.height - H / zoom / 2);
+}
+window.addEventListener("resize", resize);
+resize();
+function save() {
+  try {
+    localStorage.setItem(STORE, game.save());
+  } catch (e) {}
+}
+window.addEventListener("pagehide", save);
+function toast(text, heading = "") {
+  clearTimeout(toastTimer);
+  $("toast").innerHTML = heading ? heading + "<strong>" + text + "</strong>" : text;
+  $("toast").classList.add("show");
+  toastTimer = setTimeout(() => $("toast").classList.remove("show"), 3600);
+}
+function beep(type) {
+  if (!sound || !started) return;
+  try {
+    audio ??= new (window.AudioContext || window.webkitAudioContext)();
+    if (audio.state === "suspended") audio.resume();
+    let now = audio.currentTime;
+    if (type === "collect" && now - lastPing < 0.4) return;
+    lastPing = now;
+    let o = audio.createOscillator(),
+      v = audio.createGain();
+    o.type = "sine";
+    let f = type === "quest" ? 660 : type === "sell" ? 530 : type === "buy" ? 440 : 800;
+    o.frequency.setValueAtTime(f, now);
+    o.frequency.exponentialRampToValueAtTime(f * 1.4, now + 0.1);
+    v.gain.setValueAtTime(0.035, now);
+    v.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+    o.connect(v);
+    v.connect(audio.destination);
+    o.start();
+    o.stop(now + 0.26);
+  } catch (e) {}
+}
+function showModal(id) {
+  if (modal) $(modal).hidden = true;
+  modal = id;
+  $(id).hidden = false;
+  keys = {};
+  pointerHeld = false;
+  if (id === "shop") renderShop();
+}
+function closeModal() {
+  if (modal) $(modal).hidden = true;
+  modal = null;
+  keys = {};
+  pointerHeld = false;
+  $("resetConfirm").hidden = true;
+  save();
+}
+function togglePause() {
+  if (!started || modal) return;
+  paused = !paused;
+  $("pauseMark").hidden = !paused;
+  $("pauseBtn").textContent = paused ? "▶" : "Ⅱ";
+  keys = {};
+  pointerHeld = false;
+}
+$("startBtn").textContent = stored ? "Resume Voyage  →" : "Set Sail  →";
+$("hud").style.opacity = "0";
+$("startBtn").onclick = () => {
+  started = true;
+  $("hud").style.opacity = "1";
+  $("intro").hidden = true;
+  beep("buy");
+  toast(
+    stored
+      ? "Voyage restored. Follow your ship’s log to continue."
+      : "Click a planet. Your ship will sail there automatically.",
+    "WELCOME ABOARD",
+  );
+};
+$("upgradeBtn").onclick = () => {
+  if (started) showModal("shop");
+};
+$("closeShop").onclick = closeModal;
+$("helpBtn").onclick = () => {
+  if (started) showModal("help");
+};
+$("closeHelp").onclick = closeModal;
+$("pauseBtn").onclick = togglePause;
+$("resumeBtn").onclick = togglePause;
+$("soundBtn").onclick = () => {
+  sound = !sound;
+  $("soundBtn").textContent = sound ? "♪" : "♪̸";
+  $("soundBtn").style.opacity = sound ? 1 : 0.5;
+};
+$("fullBtn").onclick = () => {
+  if (document.fullscreenElement) document.exitFullscreen?.();
+  else
+    document.documentElement
+      .requestFullscreen?.()
+      .catch(() => toast("Open the game in its own tab to use fullscreen mode."));
+};
+$("resetBtn").onclick = () => ($("resetConfirm").hidden = false);
+$("cancelReset").onclick = () => ($("resetConfirm").hidden = true);
+$("confirmReset").onclick = () => {
+  try {
+    localStorage.removeItem(STORE);
+    localStorage.removeItem("ether-sails-v1");
+    localStorage.removeItem("ether-sails-v2");
+    localStorage.removeItem("ether-sails-v3");
+  } catch (e) {}
+  game = new Game();
+  window.game = game;
+  stored = null;
+  keys = {};
+  pointerHeld = false;
+  clickFx = null;
+  saveTick = 0;
+  closeModal();
+  paused = false;
+  $("pauseMark").hidden = true;
+  $("pauseBtn").textContent = "Ⅱ";
+  particles = [];
+  cam = { x: game.p.x, y: game.p.y };
+  save();
+  resize();
+  updateUI();
+  toast("A fresh log. Fair winds, captain!");
+};
+$("continueBtn").onclick = closeModal;
+// Close only on the overlay itself; clicks inside a panel stay in the menu.
+for (const id of ["shop", "help", "ending"]) {
+  const overlay = $(id);
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) {
+      e.stopPropagation();
+      closeModal();
+    }
+  });
+}
+$("qAction").onclick = () => {
+  shopTab = "ship";
+  showModal("shop");
+};
+let shopTab = "ship";
+function upgradeDescription(u) {
+  return (
+    {
+      hold: "Carry more cargo on your ship and workers.",
+      drill: "Gather resources faster with your ship.",
+      sails: "Sail faster between planets and harbors.",
+      unload: "Unload cargo faster across your entire fleet.",
+      worker: "Hire another ship to gather and sell resources.",
+      workerSpeed: "Make all your workers sail faster.",
+      workerDrill: "Make all your workers gather faster.",
+      azure: "Unlock Azure for your ship and workers.",
+      gate: "Open the passage to Violet Reach.",
+      nova: "Unlock Sunstone Crown for your fleet.",
+      remote: "Build a closer harbor for shorter deliveries.",
+    }[u.id] || ""
+  );
+}
+function renderWorkerOptions(d) {
+  return RESOURCES.map(
+    (n) =>
+      /* HTML */ `<option
+        value="${n.id}"
+        ${d.route === n.id ? "selected" : ""}
+        ${!game.available(n) ? "disabled" : ""}
+      >
+        ${n.name}${game.available(n) ? " · " + n.price + " ◉" : " · locked"}
+      </option>`,
+  ).join("");
+}
+
+function renderShop() {
+  $("shopMoney").textContent = "Balance: " + game.money.toLocaleString("en-US") + " ◉";
+  $("shopTabs").innerHTML = [
+    ["ship", "Ship"],
+    ["crew", "Crew · " + game.workers.length],
+    ["routes", "Routes"],
+  ]
+    .map(
+      ([id, label]) =>
+        /* HTML */ `<button
+          class="shop-tab ${shopTab === id ? "selected" : ""}"
+          data-tab="${id}"
+          role="tab"
+          aria-selected="${shopTab === id}"
+        >
+          ${label}
+        </button>`,
+    )
+    .join("");
+  document.querySelectorAll("[data-tab]").forEach(
+    (b) =>
+      (b.onclick = () => {
+        shopTab = b.dataset.tab;
+        renderShop();
+      }),
+  );
+  $("upgrades").innerHTML = UPGRADES.filter((u) => u.group === shopTab)
+    .map((u) => {
+      const lv = game.level(u.id),
+        max = lv >= u.max,
+        reason = game.reason(u.id),
+        building = game.build?.id === u.id;
+      const label = max
+        ? u.max === 1
+          ? "✓ Open"
+          : "Max level"
+        : building
+          ? Math.ceil(game.build.left) + "s"
+          : game.cost(u.id) + " ◉";
+      const prereq =
+        u.requires && !game.up[u.requires]
+          ? "Requires " + UPGRADES.find((x) => x.id === u.requires).name
+          : "";
+      const levelLabel =
+        u.id === "worker"
+          ? lv + " / " + u.max + " workers"
+          : u.max > 1
+            ? "LEVEL " + lv + " / " + u.max
+            : max
+              ? "DISCOVERED"
+              : building
+                ? "BUILDING"
+                : "EXPANSION";
+      return /* HTML */ `<div class="upcard ${max ? "owned" : ""}">
+        <div class="upicon">${u.icon}</div>
+        <div>
+          <div class="eyebrow">${u.tag}</div>
+          <h3>${u.name}</h3>
+          <div class="level">${levelLabel}</div>
+          <p>${max ? "Maximum reached." : upgradeDescription(u)}</p>
+          ${prereq ? '<p class="requirement">' + prereq + "</p>" : ""}
+        </div>
+        <button
+          class="buy"
+          data-buy="${u.id}"
+          title="${reason || "Purchase"}"
+          ${reason ? "disabled" : ""}
+        >
+          ${label}
+        </button>
+      </div>`;
+    })
+    .join("");
+  if (shopTab === "crew") {
+    $("upgrades").innerHTML += /* HTML */ `<div class="fleet-heading">
+        ROUTE ASSIGNMENTS <span>${game.workerCapacity} units per worker</span>
+      </div>
+      <p class="fleet-note">
+        Auto picks a random open planet after each delivery. A loaded worker finishes its current
+        delivery before changing routes.
+      </p>`;
+    $("upgrades").innerHTML +=
+      game.workers
+        .map(
+          (d) =>
+            /* HTML */ `<div class="worker-row">
+              <div>
+                <strong>Worker ${String(d.id).padStart(2, "0")}</strong
+                ><small data-worker-status="${d.id}"
+                  >${game.node(d.resource).name} · ${d.load}/${game.workerCapacity} ·
+                  ${d.phase === "sell" ? "delivering" : "gathering / sailing"}</small
+                ><small data-worker-income="${d.id}">Earned ${d.earned} ◉</small>
+              </div>
+              <label
+                >Assigned planet<select data-route="${d.id}" aria-label="Worker ${d.id} route">
+                  <option value="auto" ${d.route === "auto" ? "selected" : ""}>
+                    Auto · random planet
+                  </option>
+                  ${renderWorkerOptions(d)}
+                </select></label
+              >
+            </div>`,
+        )
+        .join("") || '<p class="fleet-note">No workers yet. Hire your first crewmate above.</p>';
+  }
+  document.querySelectorAll("[data-buy]").forEach(
+    (b) =>
+      (b.onclick = () => {
+        if (game.buy(b.dataset.buy)) {
+          beep("buy");
+          processEvents();
+          renderShop();
+          updateUI();
+          save();
+        }
+      }),
+  );
+  document.querySelectorAll("[data-route]").forEach(
+    (el) =>
+      (el.onchange = () => {
+        game.assignWorker(Number(el.dataset.route), el.value);
+        renderShop();
+        save();
+      }),
+  );
+}
+// Refresh values in place: do not rebuild focused selects or reset menu scroll.
+function refreshShop() {
+  $("shopMoney").textContent = "Balance: " + game.money.toLocaleString("en-US") + " ◉";
+  document.querySelectorAll("[data-buy]").forEach((b) => {
+    const u = UPGRADES.find((u) => u.id === b.dataset.buy),
+      lv = game.level(u.id),
+      max = lv >= u.max,
+      building = game.build?.id === u.id,
+      reason = game.reason(u.id),
+      card = b.closest(".upcard");
+    b.disabled = !!reason;
+    b.title = reason || "Purchase";
+    b.textContent = max
+      ? u.max === 1
+        ? "✓ Open"
+        : "Max level"
+      : building
+        ? Math.ceil(game.build.left) + "s"
+        : game.cost(u.id) + " ◉";
+    card.classList.toggle("owned", max);
+    card.querySelector(".level").textContent =
+      u.id === "worker"
+        ? lv + " / " + u.max + " workers"
+        : u.max > 1
+          ? "LEVEL " + lv + " / " + u.max
+          : max
+            ? "DISCOVERED"
+            : building
+              ? "BUILDING"
+              : "EXPANSION";
+    card.querySelector("p").textContent = max ? "Maximum reached." : upgradeDescription(u);
+    if (u.requires && game.up[u.requires]) card.querySelector(".requirement")?.remove();
+  });
+  for (const d of game.workers) {
+    const status = document.querySelector(`[data-worker-status="${d.id}"]`),
+      income = document.querySelector(`[data-worker-income="${d.id}"]`);
+    if (status)
+      status.textContent =
+        game.node(d.resource).name +
+        " · " +
+        d.load +
+        "/" +
+        game.workerCapacity +
+        " · " +
+        (d.phase === "sell" ? "delivering" : "gathering / sailing");
+    if (income) income.textContent = "Earned " + d.earned + " ◉";
+  }
+  document.querySelectorAll("[data-route] option").forEach((option) => {
+    if (option.value === "auto") return;
+    const n = game.node(option.value),
+      open = game.available(n);
+    option.disabled = !open;
+    option.textContent = n.name + (open ? " · " + n.price + " ◉" : " · locked");
+  });
+}
+function goalNode() {
+  const q = QUESTS[game.q];
+  if (!q) return null;
+  const currentPort = NODES.find(
+    (n) =>
+      n.type === "port" &&
+      game.available(n) &&
+      (game.lastNode === n.id ||
+        (game.dest && Math.hypot(game.dest.x - n.x, game.dest.y - n.y) < n.r)),
+  );
+  const deliver = game.load >= game.capacity || (game.load > 0 && currentPort);
+  const port = currentPort || game.nearestPort(game.p);
+  if (deliver) return port;
+  if (q.kind === "upgrade") return game.money >= game.cost(q.target) ? null : game.bestResource();
+  if (q.target) {
+    const n = game.node(q.target);
+    if (!game.available(n)) {
+      const u = UPGRADES.find((u) => u.id === n.unlock);
+      if (game.money >= game.cost(u.id) || game.build) return null;
+      return game.bestResource();
+    }
+    if (q.kind === "sold" && game.bag[q.target] >= q.goal - game.progress()) return port;
+    return n;
+  }
+  return game.bestResource();
+}
+function updateUI() {
+  if (modal === "shop") refreshShop();
+  const q = QUESTS[game.q];
+  $("money").textContent = game.money.toLocaleString("en-US");
+  $("load").textContent = game.load + " / " + game.capacity;
+  $("cargoBar").style.width = (game.load / game.capacity) * 100 + "%";
+  $("cargoBar").style.background = game.load >= game.capacity ? "var(--gold)" : "var(--mint)";
+  for (const n of RESOURCES)
+    $("bag" + n.id[0].toUpperCase() + n.id.slice(1)).textContent = game.bag[n.id];
+  $("bagValue").textContent = game.cargoValue + " ◉";
+  $("activity").textContent = game.activity;
+  $("clock").textContent = timeText(game.time);
+  $("sectorNum").textContent = game.p.x > 1420 ? "SECTOR II" : "SECTOR I";
+  $("sectorName").textContent = game.p.x > 1420 ? "Violet Nebula" : "Aurora Archipelago";
+  if (q) {
+    $("qNum").textContent = String(game.q + 1).padStart(2, "0") + " / " + QUESTS.length;
+    $("qTitle").textContent = q.title;
+    $("qHint").textContent = q.hint;
+    const prog = Math.min(game.progress(), q.goal);
+    $("qLabel").textContent =
+      q.kind === "earned" ? "LIFETIME TRADE" : q.kind === "fleet" ? "WORKER EARNINGS" : "PROGRESS";
+    $("qProgress").textContent = prog + " / " + q.goal;
+    $("qBar").style.width = (prog / q.goal) * 100 + "%";
+    $("qReward").textContent = q.reward ? "+" + q.reward + " ◉" : "Next milestone";
+    $("qRewardLabel").textContent = q.reward ? "Captain’s reward" : "Ship’s log";
+  } else {
+    $("qNum").textContent = QUESTS.length + " / " + QUESTS.length;
+    $("qTitle").textContent = "An Endless Sky";
+    $("qHint").textContent =
+      "All four worlds are yours. Keep upgrading, hire more workers, and choose your own routes.";
+    $("qProgress").textContent = "COMPLETE";
+    $("qBar").style.width = "100%";
+    $("qReward").textContent = "Fleet Captain";
+    $("qRewardLabel").textContent = "Your title";
+  }
+  $("qAction").hidden = q?.kind !== "upgrade";
+  $("qAction").textContent = "Open Workshop";
+  $("buildStatus").hidden = !game.build;
+  if (game.build)
+    $("buildStatus").textContent =
+      "⚒ " +
+      UPGRADES.find((u) => u.id === game.build.id).name +
+      " · " +
+      Math.ceil(game.build.left) +
+      "s";
+}
+function processEvents() {
+  for (let e of game.events) {
+    if (e.type === "collect" || e.type === "sell" || e.type === "drone") {
+      particles.push({ ...e, life: 1.25 });
+      beep(e.type);
+    } else if (e.type === "quest") {
+      toast(e.text, "✓ QUEST COMPLETE");
+      beep("quest");
+      save();
+    } else if (e.type === "full") toast(e.text);
+    else if (e.type === "unlock") {
+      toast(e.text, "✧ NEW HORIZONS");
+      beep("quest");
+    } else if (e.type === "buy") toast(e.text, "UPGRADE ORDERED");
+    else if (e.type === "finish") {
+      $("endStats").innerHTML = /* HTML */ `<div class="stat">
+          <b>${timeText(game.finishTime)}</b><small>voyage time</small>
+        </div>
+        <div class="stat">
+          <b>${game.earned.toLocaleString("en-US")} ◉</b><small>trade and helper earnings</small>
+        </div>
+        <div class="stat"><b>${game.spent} ◉</b><small>invested in upgrades</small></div>
+        <div class="stat">
+          <b>${game.workers.length} workers</b><small>four resource worlds discovered</small>
+        </div>`;
+      showModal("ending");
+      save();
+    }
+  }
+  game.events = [];
+}
+function screen(x, y) {
+  return { x: (x - cam.x) * zoom + W / 2, y: (y - cam.y) * zoom + H / 2 };
+}
+function world(x, y) {
+  return { x: (x - W / 2) / zoom + cam.x, y: (y - H / 2) / zoom + cam.y };
+}
+function setCourse(x, y) {
+  if (!started || paused || modal) return;
+  let p = world(x, y);
+  let n = NODES.find((n) => Math.hypot(p.x - n.x, p.y - n.y) < n.size * 0.55);
+  if (n) {
+    if (!game.available(n)) {
+      toast("Open " + UPGRADES.find((u) => u.id === n.unlock).name + " in Workshop → Routes.");
+      return;
+    }
+    p = { x: n.x, y: n.y };
+  }
+  if (p.x > 1380 && !game.up.gate) {
+    toast("Open the Nebula Passage in Workshop → Routes.");
+    return;
+  }
+  game.move(p.x, p.y);
+  clickFx = { x: game.dest.x, y: game.dest.y, life: 1 };
+}
+canvas.oncontextmenu = (e) => e.preventDefault();
+canvas.onpointerdown = (e) => {
+  e.preventDefault();
+  pointerHeld = true;
+  canvas.setPointerCapture?.(e.pointerId);
+  setCourse(e.clientX, e.clientY);
+};
+canvas.onpointermove = (e) => {
+  if (pointerHeld) setCourse(e.clientX, e.clientY);
+};
+canvas.onpointerup = () => (pointerHeld = false);
+canvas.onpointercancel = () => (pointerHeld = false);
+$("map").onpointerdown = (e) => {
+  if (!started || paused || modal) return;
+  e.preventDefault();
+  let r = $("map").getBoundingClientRect(),
+    x = ((e.clientX - r.left) / r.width) * CFG.width,
+    y = ((e.clientY - r.top) / r.height) * CFG.height;
+  if (x > 1380 && !game.up.gate) {
+    toast("Open the Nebula Passage in Workshop → Routes.");
+    return;
+  }
+  let n = NODES.find((n) => Math.hypot(n.x - x, n.y - y) < 170 && game.available(n));
+  game.move(n ? n.x : x, n ? n.y : y);
+  clickFx = { ...game.dest, life: 1 };
+};
+window.addEventListener("keydown", (e) => {
+  if (["Space", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.code))
+    e.preventDefault();
+  if (e.repeat) return;
+  if (e.code === "Escape") {
+    if (modal) closeModal();
+    else if (started) showModal("help");
+  } else if (e.code === "Space") togglePause();
+  else if (e.code === "KeyU" && started) {
+    if (modal === "shop") closeModal();
+    else if (!modal) showModal("shop");
+  } else if (!modal) keys[e.code] = true;
+});
+window.addEventListener("keyup", (e) => (keys[e.code] = false));
+window.addEventListener("blur", () => {
+  keys = {};
+  pointerHeld = false;
+});
+document.addEventListener("visibilitychange", () => {
+  hidden = document.hidden;
+  keys = {};
+  save();
+});
+function sprite(im, x, y, w, angle = 0, alpha = 1) {
+  if (!im?.complete || !im.naturalWidth) return;
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(angle);
+  ctx.globalAlpha = alpha;
+  ctx.drawImage(
+    im,
+    -w / 2,
+    (-w * im.naturalHeight) / im.naturalWidth / 2,
+    w,
+    (w * im.naturalHeight) / im.naturalWidth,
+  );
+  ctx.restore();
+}
+function circle(x, y, r, color, width = 1, dash = []) {
+  ctx.beginPath();
+  ctx.setLineDash(dash);
+  ctx.arc(x, y, r, 0, Math.PI * 2);
+  ctx.strokeStyle = color;
+  ctx.lineWidth = width;
+  ctx.stroke();
+  ctx.setLineDash([]);
+}
+function text(t, x, y, font, color, align = "center") {
+  ctx.font = font;
+  ctx.fillStyle = color;
+  ctx.textAlign = align;
+  ctx.fillText(t, x, y);
+}
+function drawMap() {
+  let w = 340,
+    h = 188;
+  mc.clearRect(0, 0, w, h);
+  mc.fillStyle = "#163240";
+  mc.fillRect(0, 0, w, h);
+  mc.fillStyle = game.up.gate ? "#36294388" : "#070e17bb";
+  mc.fillRect((1380 / 2400) * w, 0, w, h);
+  mc.strokeStyle = "#b8c3a633";
+  mc.setLineDash([3, 5]);
+  mc.beginPath();
+  mc.moveTo((1380 / 2400) * w, 0);
+  mc.lineTo((1380 / 2400) * w, h);
+  mc.stroke();
+  mc.setLineDash([]);
+  for (let n of NODES) {
+    mc.beginPath();
+    mc.fillStyle = game.available(n) ? n.color : "#647084";
+    mc.arc((n.x / 2400) * w, (n.y / 1400) * h, n.type === "port" ? 5 : 6, 0, Math.PI * 2);
+    mc.fill();
+  }
+  for (const d of game.workers) {
+    mc.beginPath();
+    mc.fillStyle = "#84dfcf";
+    mc.arc((d.x / 2400) * w, (d.y / 1400) * h, 2, 0, Math.PI * 2);
+    mc.fill();
+  }
+  mc.strokeStyle = "#7bbbb044";
+  mc.lineWidth = 1;
+  mc.strokeRect(
+    ((cam.x - W / zoom / 2) / 2400) * w,
+    ((cam.y - H / zoom / 2) / 1400) * h,
+    (W / zoom / 2400) * w,
+    (H / zoom / 1400) * h,
+  );
+  mc.beginPath();
+  mc.fillStyle = "#fff4d2";
+  mc.arc((game.p.x / 2400) * w, (game.p.y / 1400) * h, 4, 0, Math.PI * 2);
+  mc.fill();
+  if (game.dest) {
+    mc.beginPath();
+    mc.strokeStyle = "#fff4d277";
+    mc.moveTo((game.p.x / 2400) * w, (game.p.y / 1400) * h);
+    mc.lineTo((game.dest.x / 2400) * w, (game.dest.y / 1400) * h);
+    mc.stroke();
+  }
+}
+function render(dt, wall) {
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  ctx.clearRect(0, 0, W, H);
+  let bg = images.space;
+  if (bg.complete && bg.naturalWidth) {
+    let scale = Math.max(W / bg.naturalWidth, H / bg.naturalHeight) * 1.15,
+      bw = bg.naturalWidth * scale,
+      bh = bg.naturalHeight * scale;
+    ctx.drawImage(
+      bg,
+      (W - bw) / 2 - (cam.x - 1100) * 0.02,
+      (H - bh) / 2 - (cam.y - 700) * 0.02,
+      bw,
+      bh,
+    );
+  } else {
+    ctx.fillStyle = "#0b1c2a";
+    ctx.fillRect(0, 0, W, H);
+  }
+  ctx.save();
+  ctx.translate(W / 2, H / 2);
+  ctx.scale(zoom, zoom);
+  ctx.translate(-cam.x, -cam.y);
+  // Chart markings and interaction feedback are UI, not generated game artwork.
+  ctx.lineWidth = 1;
+  circle(690, 650, 530, "#bbcfba0c");
+  circle(690, 650, 555, "#bbcfba09");
+  circle(1900, 700, 485, "#ccace916");
+  text("I  /  AURORA ARCHIPELAGO", 760, 190, "12px Arial", "#a8c0ba46");
+  text("II  /  VIOLET NEBULA", 1870, 190, "12px Arial", "#cfb4de55");
+  ctx.setLineDash([3, 9]);
+  ctx.strokeStyle = "#a7c7bc1f";
+  ctx.beginPath();
+  ctx.moveTo(440, 800);
+  ctx.lineTo(510, 410);
+  ctx.moveTo(440, 800);
+  ctx.lineTo(1050, 760);
+  if (game.up.gate) {
+    ctx.lineTo(1840, 400);
+    ctx.lineTo(1670, 1000);
+    if (game.up.nova) ctx.lineTo(2140, 1090);
+  }
+  ctx.stroke();
+  ctx.setLineDash([]);
+  let fog = ctx.createLinearGradient(1330, 0, 1520, 0);
+  fog.addColorStop(0, "#42365200");
+  fog.addColorStop(0.5, game.up.gate ? "#7e76bc0b" : "#4c3c6077");
+  fog.addColorStop(1, game.up.gate ? "#82659d04" : "#362e5488");
+  ctx.fillStyle = fog;
+  ctx.fillRect(1330, 140, 1060, 1120);
+  ctx.setLineDash([5, 11]);
+  ctx.strokeStyle = game.up.gate ? "#d2bade18" : "#c9aec450";
+  ctx.beginPath();
+  ctx.moveTo(1380, 160);
+  ctx.lineTo(1380, 1250);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  if (!game.up.gate) {
+    text("✧", 1380, 625, "38px Georgia", "#d7bdd6");
+    text("UNCHARTED SKIES", 1380, 663, "10px Arial", "#d0bfd0");
+    text("Nebula Passage · " + game.cost("gate") + " ◉", 1380, 684, "11px Arial", "#96a2b5");
+  }
+  const goal = goalNode();
+  for (let n of NODES) {
+    let available = game.available(n),
+      active = Math.hypot(n.x - game.p.x, n.y - game.p.y) < n.r;
+    let focused = goal?.id === n.id;
+    if (n.id === "remote" && !available) {
+      circle(n.x, n.y, 85, "#c8afd235", 1, [5, 8]);
+      text("⚓", n.x, n.y + 10, "45px Georgia", "#b2a9be55");
+      text(n.name, n.x, n.y + 117, "20px Georgia", "#83919f");
+      continue;
+    }
+    if (focused && available) {
+      let glow = ctx.createRadialGradient(n.x, n.y, n.size * 0.35, n.x, n.y, n.size * 0.85);
+      glow.addColorStop(0, n.color + "16");
+      glow.addColorStop(1, n.color + "00");
+      ctx.fillStyle = glow;
+      ctx.fillRect(n.x - n.size, n.y - n.size, n.size * 2, n.size * 2);
+      circle(n.x, n.y, n.size * 0.61 + Math.sin(wall * 2) * 3, n.color + "6b", 1, [3, 6]);
+    }
+    circle(n.x, n.y, n.size * 0.61, "#c4d5c012", 1);
+    if (available) {
+      sprite(images[n.asset], n.x, n.y, n.size);
+    } else {
+      // Show only the opaque outline, never the undiscovered planet's colors or texture.
+      ctx.save();
+      ctx.filter = "brightness(0)";
+      sprite(images[n.asset], n.x, n.y, n.size);
+      ctx.restore();
+
+      ctx.save();
+      ctx.textBaseline = "middle";
+      text("?", n.x, n.y, `bold ${Math.round(n.size * 0.27)}px Georgia`, "#bdcad4");
+      ctx.restore();
+    }
+    let ly = n.y + n.size * 0.58 + 16;
+    text(n.name, n.x, ly, "20px Georgia", available ? "#f0e5ca" : "#83919f");
+    if (available && active && !game.moving && n.type === "resource" && game.load < game.capacity) {
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.size * 0.55, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * game.gather);
+      ctx.strokeStyle = n.color;
+      ctx.lineWidth = 3;
+      ctx.stroke();
+    }
+  }
+  if (game.dest) {
+    ctx.setLineDash([3, 8]);
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = "#c8e8d64d";
+    ctx.beginPath();
+    ctx.moveTo(game.p.x, game.p.y);
+    ctx.lineTo(game.dest.x, game.dest.y);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    circle(game.dest.x, game.dest.y, 13, "#baddd98f");
+    circle(game.dest.x, game.dest.y, 4, "#baddd98f");
+  }
+  if (clickFx) {
+    circle(
+      clickFx.x,
+      clickFx.y,
+      18 + (1 - clickFx.life) * 25,
+      "#cbecdc" +
+        Math.floor(clickFx.life * 150)
+          .toString(16)
+          .padStart(2, "0"),
+    );
+    clickFx.life -= dt * 1.8;
+    if (clickFx.life <= 0) clickFx = null;
+  }
+  for (const d of game.workers) {
+    const offset = ((d.id % 3) - 1) * 16;
+    sprite(images.ship, d.x + offset, d.y, 52, d.a || 0, 0.9);
+    text(
+      "W" + d.id + " · " + d.load + "/" + game.workerCapacity,
+      d.x + offset,
+      d.y + 38 + (d.id % 2) * 9,
+      "8px Arial",
+      "#98cbbd",
+    );
+  }
+  if (game.dest) {
+    ctx.save();
+    ctx.translate(game.p.x, game.p.y);
+    ctx.rotate(game.p.a);
+    let g = ctx.createLinearGradient(0, 10, 0, 85);
+    g.addColorStop(0, "#84e4d94a");
+    g.addColorStop(1, "#84e4d900");
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.moveTo(-8, 12);
+    ctx.lineTo(-23, 90);
+    ctx.lineTo(23, 90);
+    ctx.lineTo(8, 12);
+    ctx.fill();
+    ctx.restore();
+  }
+  circle(game.p.x, game.p.y, 46, "#bce9d630", 1);
+  sprite(images.ship, game.p.x, game.p.y, 116, game.p.a);
+  if (game.load) {
+    let cap = game.capacity;
+    ctx.fillStyle = "#061821cc";
+    ctx.fillRect(game.p.x - 25, game.p.y + 69, 50, 3);
+    ctx.fillStyle = game.load === cap ? "#e9c88c" : "#87d8c5";
+    ctx.fillRect(game.p.x - 25, game.p.y + 69, (50 * game.load) / cap, 3);
+  }
+  for (let p of particles) {
+    p.life -= dt;
+    p.y -= dt * 22;
+    ctx.globalAlpha = clamp(p.life, 0, 1);
+    text(
+      p.text,
+      p.x + (p.type === "collect" ? 40 : 0),
+      p.y - 30,
+      "bold 14px Arial",
+      p.type === "collect" ? "#a9e8d4" : "#f0d095",
+    );
+  }
+  ctx.globalAlpha = 1;
+  particles = particles.filter((p) => p.life > 0).slice(-40);
+  ctx.restore();
+  if (started && goal) {
+    let s = screen(goal.x, goal.y);
+    if (s.x < 40 || s.x > W - 40 || s.y < 85 || s.y > H - 150) {
+      let center = screen(game.p.x, game.p.y),
+        dx = s.x - center.x,
+        dy = s.y - center.y;
+      let a = Math.atan2(dy, dx),
+        r = Math.min(
+          (W / 2 - 42) / Math.max(0.01, Math.abs(Math.cos(a))),
+          (H / 2 - 140) / Math.max(0.01, Math.abs(Math.sin(a))),
+        );
+      let x = W / 2 + Math.cos(a) * r,
+        y = H / 2 + Math.sin(a) * r;
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.fillStyle = "#102a35e8";
+      ctx.strokeStyle = "#d8c39477";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.arc(0, 0, 24, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+      ctx.rotate(a);
+      text("➤", 0, 6, "21px Arial", "#efd19a");
+      ctx.restore();
+      text(goal.name, x, y + 40, "11px Arial", "#dfd6bc");
+    }
+  }
+  drawMap();
+}
+function frame(t) {
+  let dt = Math.min((t - last) / 1000 || 0, 0.05);
+  last = t;
+  let running = started && !paused && !hidden;
+  if (running) {
+    let dx = (keys.KeyD || keys.ArrowRight ? 1 : 0) - (keys.KeyA || keys.ArrowLeft ? 1 : 0),
+      dy = (keys.KeyS || keys.ArrowDown ? 1 : 0) - (keys.KeyW || keys.ArrowUp ? 1 : 0);
+    game.update(dt, modal ? null : { x: dx, y: dy });
+    processEvents();
+    saveTick += dt;
+    if (saveTick > 3) {
+      save();
+      saveTick = 0;
+    }
+  }
+  let tx = clamp(game.p.x, W / zoom / 2, CFG.width - W / zoom / 2),
+    ty = clamp(game.p.y, H / zoom / 2, CFG.height - H / zoom / 2);
+  cam.x += (tx - cam.x) * Math.min(1, dt * 5);
+  cam.y += (ty - cam.y) * Math.min(1, dt * 5);
+  render(dt, t / 1000);
+  uiTick += dt;
+  if (uiTick > 0.12) {
+    updateUI();
+    uiTick = 0;
+  }
+  requestAnimationFrame(frame);
+}
+updateUI();
+requestAnimationFrame(frame);
+;
+    </script>
+  </body>
+</html>
