@@ -7,6 +7,7 @@ Hi! I'm Artiom, a junior developer from Vilnius, Lithuania — Game Development 
 | Project | Tech | Description |
 |---|---|---|
 | [Clicker Game](#-clicker-game) | Unity, C# | Incremental clicker with prestige mechanic — builds to Windows and WebGL |
+| [Game Prototype](#-game-prototype) | HTML, JavaScript | Incremental clicker game prototype made by using AI for prototyping|
 | Home Lab | Raspberry Pi, Linux, DNS/DHCP, SSH | My home network lab — Pi-hole ad-blocking, remote administration |
 
 ---
