@@ -21,7 +21,7 @@ An incremental clicker game with an upgrade shop, passive income, and a prestige
 
 - [View Clicker Game project](C%23/Unity/Clicker%20game)
 - Windows build: see the `Build` folder inside the project directory.
-- To run from source, add `C#/Unity/Clicker game` in Unity Hub and open `Assets/Scenes/SampleScene.unity`.
+- To run from source, add `C#/Unity/Clicker game/Project/Clicker Game` in Unity Hub and open `Assets/Scenes/SampleScene.unity`.
 
 ### Avalonia UI Test Task
 
