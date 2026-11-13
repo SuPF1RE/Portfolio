@@ -1,53 +1,57 @@
 # Artiom Petkun — Project Portfolio
 
-Hi! I'm Artiom, a junior developer from Vilnius, Lithuania — Game Development graduate (Vilnius Business College, 2025). This repository collects my personal projects. Each folder is a self-contained project with its own docs and build.
+Hi! I'm Artiom, a junior developer from Vilnius, Lithuania and a Game Development graduate of Vilnius Business College (2025). This portfolio brings together my development projects and home lab experience.
 
-## 📂 Projects
+## Projects
 
-| Project | Tech | Description |
-|---|---|---|
-| [Clicker Game](#-clicker-game) | Unity, C# | Incremental clicker with prestige mechanic — builds to Windows and WebGL |
-| [Game Prototype](#-game-prototype) | HTML, JavaScript | Incremental clicker game prototype made by using AI for prototyping|
-| Home Lab | Raspberry Pi, Linux, DNS/DHCP, SSH | My home network lab — Pi-hole ad-blocking, remote administration |
+### JobTracker
 
----
+**C# · ASP.NET Core Web API · Entity Framework Core · PostgreSQL · React · JavaScript**
 
-## 🎮 Clicker Game
+A local web application for tracking job applications. It supports adding, editing, deleting, searching, and filtering applications, with data stored in PostgreSQL. The interface includes English and Russian language options and light and dark themes.
 
-**Engine:** Unity 6000.0.62f1 LTS · **Language:** C# · **Status:** Playable build available
+- [View JobTracker repository](https://github.com/SuPF1RE/JobTracker)
+- Runs locally; setup instructions are available in the project README.
 
-An incremental clicker where the player grows gold from a single click to an automated empire. Built to practise core Unity workflows: UI, game state, prestige mechanic.
+### Clicker Game
 
-### ✨ Features
+**Unity · C#**
 
-- Click-to-earn core gameplay loop
-- Upgrade shop with scaling prices
-- Passive / auto-income generators
-- Prestige / reset mechanic 
+An incremental clicker game with an upgrade shop, passive income, and a prestige mechanic. The project was built to practise Unity UI, event handling, game state, and balancing an economy curve.
 
-### ▶️ Play it
+- [View Clicker Game project](C%23/Unity/Clicker%20game)
+- Windows build: see the `Build` folder inside the project directory.
+- To run from source, add `C#/Unity/Clicker game` in Unity Hub and open `Assets/Scenes/SampleScene.unity`.
 
-- **Windows build:** see the `Build` folder inside `C#/Unity/Clicker game`
+### Avalonia UI Test Task
 
-### 🛠 Run from source
+**C# · .NET · Avalonia UI**
 
-1. Clone this repository
-2. In Unity Hub: **Add → Add project from disk** → select `C#/Unity/Clicker game`
-3. Open with Unity 
-4. Open the main scene (`Assets/Scenes/SampleScene.unity`)
+A desktop application test task using Avalonia UI.
 
-### 🧠 What I learned building this
+- [View Avalonia UI project](C%23/.NET/Avalonia%20UI/Task%20%E2%84%961/Test-task-main)
 
-- Unity UI system and event handling
-- Balancing an economy curve
-- Version control with Git and large binary assets
+### Game Prototype
 
-### Ongoing — commercial game project (private)
-Developing turn-based multiplayer in unity. Code is not public — happy to walk through the architecture and technical decisions in an interview.
+**HTML · JavaScript**
 
----
+An incremental clicker game prototype made using AI for prototyping.
 
-## 📬 Contact
+- [View Game Prototype](game%20prototype)
 
-- **Email:** mrgrom28@gmail.com
+## Home Lab
+
+**Raspberry Pi · Linux · DNS/DHCP · SSH**
+
+A home network lab with Pi-hole ad-blocking and remote administration.
+
+## Ongoing project
+
+**Commercial game project — private**
+
+Developing turn-based multiplayer in Unity. The code is not public; I can discuss the architecture and technical decisions in an interview.
+
+## Contact
+
+- **Email:** [mrgrom28@gmail.com](mailto:mrgrom28@gmail.com)
 - **Location:** Vilnius, Lithuania
